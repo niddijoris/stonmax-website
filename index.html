@@ -1,1202 +1,1140 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="./support.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stonmax — temir-beton plitalar va tayyor beton, Qo‘qon</title>
+<meta name="description" content="Stonmax Qo‘qon: 2PK va PB temir-beton plitalar, tayyor suyuq beton M100–M500, quduq halqalari, lotoklar. Narxlar, kalkulyator va yetkazib berish.">
+<script src="./support.js"></script>
 </head>
-
 <body>
-  <x-dc>
-    <helmet>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-      <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&amp;display=swap">
-      <link rel="stylesheet" href="_ds/modernist-c3a640d7-ee20-4626-9afe-2c54c44a3644/styles.css">
-      <script src="_ds/modernist-c3a640d7-ee20-4626-9afe-2c54c44a3644/_ds_bundle.js"></script>
-      <style>
-        :root {
-          --sx-bg: #0D0F12;
-          --sx-bg2: #14171D;
-          --sx-surface: #1E222B;
-          --sx-line: #282D37;
-          --sx-ink: #F8FAFC;
-          --sx-muted: #94A3B8;
-          --sx-onaccent: #ffffff;
-          --sx-grid: rgba(255, 255, 255, .055);
-          --sx-hud: rgba(13, 15, 18, .94);
-          --sx-headerbg: rgba(13, 15, 18, .86);
-          --sx-accent: #dd0506;
-          --sx-logo: invert(1) hue-rotate(180deg) saturate(1.6);
-          --sx-blend: screen;
-        }
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="_ds/modernist-c3a640d7-ee20-4626-9afe-2c54c44a3644/styles.css">
+<script src="_ds/modernist-c3a640d7-ee20-4626-9afe-2c54c44a3644/_ds_bundle.js"></script>
+<script src="stonmax-data.js"></script>
+<script src="image-slot.js"></script>
+<style>
+  :root, [data-theme="dark"] { --bg:#0D0F12; --bg2:#14171D; --surf:#1E222B; --line:#282D37; --ink:#F8FAFC; --mute:#94A3B8; --acc:#dd0506; --acc-d:#b30405; --grid:#FFFFFF0B; --head:rgba(13,15,18,.9); --logo-f:invert(1) hue-rotate(180deg) saturate(1.6); --logo-b:screen; --fh:'Orbitron',sans-serif; --fb:'Helvetica Neue',Helvetica,Arial,sans-serif; }
+  [data-theme="light"] { --bg:#F3F2F2; --bg2:#FFFFFF; --surf:#FFFFFF; --line:#D5D2CF; --ink:#141414; --mute:#5B6470; --acc:#dd0506; --acc-d:#b30405; --grid:#0000000A; --head:rgba(243,242,242,.92); --logo-f:none; --logo-b:multiply; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: #0D0F12; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--acc); }
+  ::selection { background: #dd0506; color: #fff; }
+  :focus-visible { outline: 2px solid #dd0506; outline-offset: 2px; }
+  input, select, textarea, button { font-family: inherit; }
+  input[type=range] { -webkit-appearance: none; appearance: none; height: 2px; background: var(--line); width: 100%; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 30px; background: #dd0506; cursor: grab; }
+  input[type=range]::-moz-range-thumb { border: 0; width: 22px; height: 30px; background: #dd0506; cursor: grab; }
+  @keyframes sxPulse { 0% { transform: scale(.3); opacity: .9 } 100% { transform: scale(1); opacity: 0 } }
+  @keyframes sxBlink { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
+  @keyframes sxSweep { to { transform: rotate(360deg) } }
+  @keyframes sxRise { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: none } }
+  @keyframes sxTicker { to { transform: translateX(-50%) } }
+  @media print { header, footer, [data-noprint] { display: none !important } }
+</style>
+</helmet>
 
-        [data-sx-theme="light"] {
-          --sx-bg: #F2F1EF;
-          --sx-bg2: #FFFFFF;
-          --sx-surface: #FFFFFF;
-          --sx-line: #D4D2CE;
-          --sx-ink: #16181D;
-          --sx-muted: #5E6570;
-          --sx-onaccent: #ffffff;
-          --sx-grid: rgba(0, 0, 0, .055);
-          --sx-hud: rgba(255, 255, 255, .96);
-          --sx-headerbg: rgba(242, 241, 239, .9);
-          --sx-logo: none;
-          --sx-blend: multiply;
-        }
+<div data-theme="{{ theme }}" style="font-family: var(--fb); background: var(--bg); color: var(--ink); min-height: 100vh; overflow-x: clip; padding-bottom: {{ bottomPad }}; transition: background .3s ease, color .3s ease">
 
-        html {
-          scroll-behavior: smooth;
-        }
-
-        body {
-          margin: 0;
-          background: var(--sx-bg);
-          color: var(--sx-ink);
-        }
-
-        a {
-          color: #dd0506;
-          text-decoration: none;
-        }
-
-        a:hover {
-          color: var(--sx-ink);
-        }
-
-        ::selection {
-          background: #dd0506;
-          color: var(--sx-onaccent);
-        }
-
-        :focus-visible {
-          outline: 2px solid #dd0506;
-          outline-offset: 2px;
-        }
-
-        input,
-        select,
-        textarea,
-        button {
-          font-family: 'Helvetica Neue', Helvetica, Arial, var(--font-body);
-        }
-
-        input[type=range] {
-          -webkit-appearance: none;
-          appearance: none;
-          height: 2px;
-          background: var(--sx-line);
-        }
-
-        @keyframes sxFade {
-          from {
-            opacity: 0
-          }
-
-          to {
-            opacity: 1
-          }
-        }
-
-        @keyframes sxPop {
-          from {
-            opacity: 0;
-            transform: translateY(24px)
-          }
-
-          to {
-            opacity: 1;
-            transform: none
-          }
-        }
-
-        input[type=range]::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          width: 18px;
-          height: 26px;
-          background: #dd0506;
-          cursor: grab;
-        }
-
-        input[type=range]::-moz-range-thumb {
-          border: 0;
-          width: 18px;
-          height: 26px;
-          background: #dd0506;
-          cursor: grab;
-        }
-
-        @keyframes sxPulse {
-          0% {
-            transform: scale(.3);
-            opacity: .9
-          }
-
-          100% {
-            transform: scale(1);
-            opacity: 0
-          }
-        }
-
-        @keyframes sxBlink {
-
-          0%,
-          100% {
-            opacity: 1
-          }
-
-          50% {
-            opacity: .25
-          }
-        }
-
-        @keyframes sxSweep {
-          to {
-            transform: rotate(360deg)
-          }
-        }
-
-        @keyframes sxRise {
-          from {
-            opacity: 0;
-            transform: translateY(24px)
-          }
-
-          to {
-            opacity: 1;
-            transform: none
-          }
-        }
-
-        @keyframes sxTicker {
-          to {
-            transform: translateX(-50%)
-          }
-        }
-      </style>
-    </helmet>
-
-    <div data-sx-theme="{{ theme }}"
-      style="font-family: 'Helvetica Neue', Helvetica, Arial, var(--font-body); background: var(--sx-bg); color: var(--sx-ink); min-height: 100vh; overflow-x: hidden; transition: background .3s ease, color .3s ease">
-
-      <header
-        style="position: sticky; top: 0; z-index: 40; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-6); padding: var(--space-3) clamp(16px, 4vw, 48px); background: var(--sx-headerbg); backdrop-filter: blur(12px); border-bottom: 2px solid var(--sx-line)">
-        <a href="#top" style="display: flex; align-items: center; gap: 10px; margin-right: auto; color: var(--sx-ink)">
-          <span style="display: block; width: 44px; height: 44px; overflow: hidden; position: relative; flex: none">
-            <img src="uploads/logo%203.jpg" alt="Stonmax"
-              style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 74px; height: 74px; max-width: none; filter: var(--sx-logo); mix-blend-mode: var(--sx-blend)">
-          </span>
-          <span
-            style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 19px; letter-spacing: .02em">STONMAX</span>
-          <span style="font-size: 9px; letter-spacing: .22em; color: var(--sx-muted); align-self: center">ZAVOD</span>
-        </a>
-        <nav
-          style="display: flex; flex-wrap: wrap; flex: 1 1 auto; justify-content: flex-end; gap: var(--space-4); font-size: 11px; white-space: nowrap; letter-spacing: .1em; text-transform: uppercase; color: var(--sx-muted)">
-          <a href="#mahsulotlar" style="color: var(--sx-muted)">Mahsulotlar</a>
-          <a href="#kalkulyator" style="color: var(--sx-muted)">Kalkulyator</a>
-          <a href="#quvvat" style="color: var(--sx-muted)">Quvvat</a>
-          <a href="#sertifikat" style="color: var(--sx-muted)">Sertifikatlar</a>
+  <header style="position: sticky; top: 0; z-index: 50; background: var(--head); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 2px solid var(--line)">
+    <div style="display: flex; align-items: center; gap: 16px; max-width: 1440px; margin: 0 auto; min-height: 64px; padding: 8px clamp(16px, 4vw, 48px)">
+      <a href="#/" style="display: flex; align-items: center; gap: 10px; margin-right: auto; color: var(--ink)">
+        <span style="display: block; width: 40px; height: 40px; overflow: hidden; position: relative; flex: none">
+          <img src="uploads/logo%203.jpg" alt="Stonmax" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 68px; height: 68px; max-width: none; filter: var(--logo-f); mix-blend-mode: var(--logo-b)">
+        </span>
+        <span style="font-family: var(--fh); font-weight: 800; font-size: 18px; letter-spacing: .02em">STONMAX</span>
+      </a>
+      <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+        <nav style="display: flex; gap: 4px">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+            <a href="{{ n.href }}" style="padding: 10px 12px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: {{ n.color }}; border-bottom: 2px solid {{ n.line }}">{{ n.label }}</a>
+          </sc-for>
         </nav>
-        <button type="button" onClick="{{ toggleTheme }}" aria-label="Rejimni almashtirish" title="{{ themeTitle }}"
-          style="display: inline-flex; align-items: center; gap: 8px; padding: 11px 14px; border: 2px solid var(--sx-line); background: transparent; color: var(--sx-ink); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer"
-          style-hover="borderColor:#dd0506">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path
-              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4">
-            </path>
-          </svg>
-          {{ themeLabel }}
+        <a href="{{ phoneHref }}" style="display: flex; align-items: center; gap: 8px; font-family: var(--fh); font-weight: 700; font-size: 13px; white-space: nowrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          {{ phone }}
+        </a>
+      </sc-if>
+      <button type="button" onClick="{{ toggleTheme }}" aria-label="Mavzuni almashtirish" style="display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid var(--line); background: transparent; color: var(--ink); cursor: pointer" style-hover="borderColor:#dd0506">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+        </sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+        </sc-if>
+      </button>
+      <sc-if value="{{ isMob }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ openMenu }}" aria-label="Menyu" style="display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: #dd0506; color: #fff; cursor: pointer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
-        <a href="#aloqa"
-          style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; background: #dd0506; color: var(--sx-onaccent); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px; letter-spacing: .02em"
-          style-hover="background:var(--sx-ink);color:var(--sx-bg)">Buyurtma berish</a>
-      </header>
+      </sc-if>
+    </div>
+  </header>
 
-      <section id="top"
-        style="position: relative; border-bottom: 2px solid var(--sx-line); background: var(--sx-bg); overflow: hidden">
-        <div
-          style="position: absolute; inset: 0; background-image: linear-gradient(var(--sx-grid) 1px, transparent 1px), linear-gradient(90deg, var(--sx-grid) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none">
-        </div>
-        <div
-          style="position: absolute; inset: 0; opacity: .05; pointer-events: none; background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22&gt;&lt;filter id=%22n%22&gt;&lt;feTurbulence baseFrequency=%22.9%22 numOctaves=%224%22/&gt;&lt;/filter&gt;&lt;rect width=%22120%22 height=%22120%22 filter=%22url(%23n)%22/&gt;&lt;/svg&gt;')">
-        </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 80; background: var(--bg); display: flex; flex-direction: column; animation: sxRise .25s ease both">
+      <div style="display: flex; align-items: center; justify-content: space-between; min-height: 64px; padding: 8px 16px; border-bottom: 2px solid var(--line)">
+        <span style="font-family: var(--fh); font-weight: 800; font-size: 18px">STONMAX</span>
+        <button type="button" onClick="{{ closeMenu }}" aria-label="Yopish" style="display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid var(--line); background: transparent; color: var(--ink); cursor: pointer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <nav style="display: flex; flex-direction: column; flex: 1; overflow: auto">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+          <a href="{{ n.href }}" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 16px; border-bottom: 2px solid var(--line); font-family: var(--fh); font-weight: 800; font-size: 22px; text-transform: uppercase; color: {{ n.color }}">{{ n.label }} <span style="color: #dd0506">&rarr;</span></a>
+        </sc-for>
+      </nav>
+      <div style="display: grid; gap: 8px; padding: 16px; border-top: 2px solid var(--line)">
+        <a href="{{ phoneHref }}" style="display: flex; align-items: center; min-height: 52px; padding: 0 18px; background: #dd0506; color: #fff; font-family: var(--fh); font-weight: 700">{{ phone }}</a>
+        <a href="{{ tgHref }}" style="display: flex; align-items: center; min-height: 52px; padding: 0 18px; border: 2px solid var(--line); font-family: var(--fh); font-weight: 700">Telegram {{ tg }}</a>
+      </div>
+    </div>
+  </sc-if>
 
-        <div
-          style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: clamp(24px, 5vw, 72px); align-items: center; max-width: 1480px; margin: 0 auto; padding: clamp(40px, 7vw, 96px) clamp(16px, 4vw, 48px)">
-          <div style="display: flex; flex-direction: column; gap: var(--space-6); animation: sxRise .7s ease both">
-            <div
-              style="display: inline-flex; align-items: center; gap: 10px; align-self: start; padding: 8px 14px; border: 2px solid var(--sx-line); background: var(--sx-bg2); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sx-muted)">
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <main data-screen-label="Bosh sahifa" style="animation: sxRise .5s ease both">
+      <section style="border-bottom: 2px solid var(--line); background: var(--bg2)">
+        <div style="display: flex; flex-direction: column; gap: 10px; max-width: 1440px; margin: 0 auto; padding: 12px clamp(16px, 4vw, 48px)">
+          <form onSubmit="{{ onHomeSearch }}" style="position: relative; display: flex">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 14px; top: 17px; color: var(--mute); pointer-events: none"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            <input type="search" value="{{ q }}" onInput="{{ onSearch }}" placeholder="Qidirish: 2PK 6.0, M300, lotok..." style="flex: 1; min-width: 0; min-height: 52px; padding: 12px 14px 12px 44px; border: 2px solid var(--line); border-right: 0; background: var(--bg); color: var(--ink); font-size: 16px" style-focus="borderColor:#dd0506;outline:none">
+            <button type="submit" style="flex: none; min-height: 52px; padding: 0 18px; border: 0; background: #dd0506; color: #fff; font-family: var(--fh); font-weight: 700; font-size: 13px; cursor: pointer" style-hover="background:#b30405">Topish</button>
+          </form>
+          <sc-if value="{{ hasSuggest }}" hint-placeholder-val="{{ false }}">
+            <div style="border: 2px solid var(--line); border-bottom: 0; background: var(--bg)">
+              <sc-for list="{{ suggest }}" as="sg" hint-placeholder-count="3">
+                <a href="{{ sg.href }}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 10px 14px; border-bottom: 2px solid var(--line); font-size: 14px">
+                  <span style="display: flex; gap: 10px; align-items: baseline; min-width: 0"><b style="font-family: var(--fh); color: #dd0506; flex: none">{{ sg.code }}</b><span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ sg.name }}</span></span>
+                  <span style="flex: none; font-size: 12px; font-weight: 700; color: var(--mute)">{{ sg.price }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
+          <div style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none">
+            <sc-for list="{{ quickCats }}" as="qc" hint-placeholder-count="5">
+              <a href="#/katalog" onClick="{{ qc.onClick }}" style="flex: none; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 2px solid var(--line); background: var(--bg); font-size: 13px; font-weight: 700; white-space: nowrap" style-hover="borderColor:#dd0506">{{ qc.name }} <span style="color: var(--mute); font-weight: 400">{{ qc.n }}</span></a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      <section style="position: relative; border-bottom: 2px solid var(--line); overflow: hidden">
+        <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 64px 64px; pointer-events: none"></div>
+        <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: clamp(24px, 5vw, 64px); align-items: center; max-width: 1440px; margin: 0 auto; padding: clamp(32px, 7vw, 96px) clamp(16px, 4vw, 48px)">
+          <div style="display: flex; flex-direction: column; gap: 22px">
+            <div style="display: inline-flex; align-items: center; gap: 10px; align-self: start; padding: 8px 12px; border: 2px solid var(--line); background: var(--bg2); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mute)">
               <span style="width: 8px; height: 8px; background: #dd0506; animation: sxBlink 1.4s infinite"></span>
               Zavod 24/7 ishlab chiqarish rejimida
             </div>
-            <h1
-              style="margin: 0; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(44px, 7.4vw, 108px); line-height: .92; letter-spacing: 0; text-transform: uppercase; text-wrap: balance">
-              Beton<br>
-              <span style="color: #dd0506">quyiladi.</span><br>
-              Shahar<br>ko’tariladi.
-            </h1>
-            <p
-              style="max-width: 46ch; margin: 0; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.6; color: var(--sx-muted); text-wrap: pretty">
-              2PK temir-beton plitalar, M100–M450 tayyor suyuq beton, quruq qorishmalar, inert materiallar va albaster —
-              bir zavoddan, laboratoriya nazorati va GOST sertifikati bilan.
-            </p>
-            <div style="display: flex; flex-wrap: wrap; gap: var(--space-3)">
-              <a href="#kalkulyator"
-                style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 22px; background: #dd0506; color: var(--sx-onaccent); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 14px"
-                style-hover="background:var(--sx-ink);color:var(--sx-bg)">Hajmni hisoblash →</a>
-              <a href="#mahsulotlar"
-                style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 22px; border: 2px solid var(--sx-line); color: var(--sx-ink); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 14px"
-                style-hover="borderColor:#dd0506">Mahsulot katalogi</a>
+            <h1 style="margin: 0; font-family: var(--fh); font-weight: 900; font-size: clamp(38px, 9vw, 104px); line-height: .95; text-transform: uppercase">Beton<br><span style="color: #dd0506">quyiladi.</span><br>Shahar<br>ko&rsquo;tariladi.</h1>
+            <p style="max-width: 46ch; margin: 0; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6; color: var(--mute); text-wrap: pretty">Qo&rsquo;qondagi Stonmax zavodi: 2PK va PB plitalar, M100&ndash;M500 tayyor beton, quduq halqalari, lotoklar, ustunlar va inert materiallar. 50 km radiusda 24/7 yetkazish.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px">
+              <a href="#/katalog" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; background: #dd0506; color: #fff; font-family: var(--fh); font-weight: 700; font-size: 13px" style-hover="background:#b30405;color:#fff">Katalog va narxlar &rarr;</a>
+              <a href="#/kalkulyator" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; border: 2px solid var(--line); font-family: var(--fh); font-weight: 700; font-size: 13px" style-hover="borderColor:#dd0506">Hajmni hisoblash</a>
             </div>
           </div>
-
-          <div ref="{{ tiltRef }}"
-            style="position: relative; min-height: clamp(320px, 42vw, 520px); display: grid; place-items: center; perspective: 1400px">
-            <div ref="{{ slabRef }}"
-              style="position: relative; width: 100%; max-width: 560px; transform-style: preserve-3d; transition: transform .12s linear">
-              <svg viewBox="0 0 560 420" style="width: 100%; height: auto; display: block; overflow: visible">
-                <g stroke="#dd0506" stroke-width="1.4" fill="none" opacity=".55">
-                  <path d="M60 300 L280 176 L500 300"></path>
-                  <path d="M60 300 L280 424 L500 300"></path>
-                </g>
+          <div ref="{{ tiltRef }}" style="position: relative; display: grid; place-items: center; perspective: 1400px; min-height: clamp(260px, 60vw, 500px)">
+            <div ref="{{ slabRef }}" style="position: relative; width: 100%; max-width: 560px; transition: transform .12s linear">
+              <svg viewBox="0 0 560 440" style="width: 100%; height: auto; display: block; overflow: visible">
                 <g transform="translate(0,86)">
-                  <path d="M60 300 L280 176 L500 300 L280 424 Z" fill="var(--sx-bg2)" stroke="var(--sx-line)"
-                    stroke-width="2"></path>
-                  <g stroke="var(--sx-muted)" stroke-width="1" opacity=".45">
-                    <path d="M100 277 L320 401"></path>
-                    <path d="M140 254 L360 378"></path>
-                    <path d="M180 231 L400 355"></path>
-                    <path d="M220 208 L440 332"></path>
-                    <path d="M460 277 L240 401"></path>
-                    <path d="M420 254 L200 378"></path>
-                    <path d="M380 231 L160 355"></path>
-                    <path d="M340 208 L120 332"></path>
-                  </g>
-                  <text x="60" y="358" fill="var(--sx-muted)" font-size="11" font-family="Orbitron"
-                    letter-spacing="2">ASOS / BAZA</text>
+                  <path d="M60 300 L280 176 L500 300 L280 424 Z" style="fill: var(--bg2); stroke: var(--line); stroke-width: 2"></path>
+                  <g style="stroke: var(--mute); stroke-width: 1; opacity: .45"><path d="M100 277 L320 401"></path><path d="M180 231 L400 355"></path><path d="M460 277 L240 401"></path><path d="M380 231 L160 355"></path></g>
                 </g>
-                <g ref="{{ layerRebarRef }}" transform="translate(0,26)" style="transition: transform .12s linear">
-                  <path d="M60 300 L280 176 L500 300 L280 424 Z" fill="#dd050614" stroke="#dd0506" stroke-width="1.6">
-                  </path>
-                  <g stroke="#dd0506" stroke-width="2.2">
-                    <path d="M96 279 L316 403"></path>
-                    <path d="M132 258 L352 382"></path>
-                    <path d="M168 237 L388 361"></path>
-                    <path d="M204 217 L424 341"></path>
-                    <path d="M240 196 L460 320"></path>
-                  </g>
-                  <g stroke="#dd0506" stroke-width="1.2" opacity=".8">
-                    <path d="M464 279 L244 403"></path>
-                    <path d="M428 258 L208 382"></path>
-                    <path d="M392 237 L172 361"></path>
-                    <path d="M356 217 L136 341"></path>
-                    <path d="M320 196 L100 320"></path>
-                  </g>
+                <g ref="{{ rebarRef }}" transform="translate(0,26)" style="transition: transform .12s linear">
+                  <path d="M60 300 L280 176 L500 300 L280 424 Z" style="fill: #dd050612; stroke: #dd0506; stroke-width: 1.6"></path>
+                  <g style="stroke: #dd0506; stroke-width: 2.4"><path d="M96 279 L316 403"></path><path d="M132 258 L352 382"></path><path d="M168 237 L388 361"></path><path d="M204 217 L424 341"></path><path d="M240 196 L460 320"></path></g>
+                  <g style="stroke: #dd0506; stroke-width: 1.2; opacity: .8"><path d="M464 279 L244 403"></path><path d="M428 258 L208 382"></path><path d="M392 237 L172 361"></path><path d="M356 217 L136 341"></path><path d="M320 196 L100 320"></path></g>
                 </g>
-                <g ref="{{ layerTopRef }}" transform="translate(0,-46)" style="transition: transform .12s linear">
-                  <path d="M60 300 L280 176 L500 300 L280 424 Z" fill="var(--sx-surface)" stroke="var(--sx-ink)"
-                    stroke-width="2"></path>
-                  <g fill="var(--sx-bg)" stroke="var(--sx-muted)" stroke-width="1.2">
-                    <ellipse cx="196" cy="300" rx="26" ry="14"></ellipse>
-                    <ellipse cx="252" cy="332" rx="26" ry="14"></ellipse>
-                    <ellipse cx="308" cy="300" rx="26" ry="14"></ellipse>
-                    <ellipse cx="252" cy="268" rx="26" ry="14"></ellipse>
-                    <ellipse cx="364" cy="332" rx="26" ry="14"></ellipse>
-                    <ellipse cx="140" cy="268" rx="26" ry="14"></ellipse>
-                  </g>
-                  <g stroke="#dd0506" stroke-width="1.6" fill="none">
-                    <path d="M500 300 L530 318"></path>
-                  </g>
-                  <text x="536" y="326" fill="#dd0506" font-size="11" font-family="Orbitron" letter-spacing="2">220
-                    mm</text>
+                <g ref="{{ topRef }}" transform="translate(0,-46)" style="transition: transform .12s linear">
+                  <path d="M60 300 L280 176 L500 300 L280 424 Z" style="fill: var(--surf); stroke: var(--ink); stroke-width: 2"></path>
+                  <g style="fill: var(--bg); stroke: var(--mute); stroke-width: 1.2"><ellipse cx="196" cy="300" rx="26" ry="14"></ellipse><ellipse cx="252" cy="332" rx="26" ry="14"></ellipse><ellipse cx="308" cy="300" rx="26" ry="14"></ellipse><ellipse cx="252" cy="268" rx="26" ry="14"></ellipse><ellipse cx="364" cy="332" rx="26" ry="14"></ellipse><ellipse cx="140" cy="268" rx="26" ry="14"></ellipse></g>
+                  <path d="M500 300 L530 318" style="stroke: #dd0506; stroke-width: 1.6"></path>
+                  <text x="508" y="338" style="fill: #dd0506; font-size: 12px; font-family: var(--fh); letter-spacing: 2px">220</text>
                 </g>
               </svg>
-              <div
-                style="position: absolute; left: 0; bottom: -8px; display: flex; flex-wrap: wrap; gap: var(--space-4); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">
-                <span>— Kursorni harakatlantiring</span>
-                <span style="color: #dd0506">Armatura setkasi A500C</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">
+                <span>2PK &middot; 220 mm</span><span style="color: #dd0506">Armatura A400 &Oslash;12&ndash;&Oslash;16</span><span>GOST 9561-2016</span>
               </div>
             </div>
           </div>
         </div>
-
-        <div
-          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); border-top: 2px solid var(--sx-line)">
-          <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="4">
-            <div
-              style="padding: var(--space-6) clamp(16px, 3vw, 32px); border-right: 2px solid var(--sx-line); background: var(--sx-bg2)">
-              <div
-                style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(26px, 3vw, 40px); letter-spacing: 0">
-                {{ s.value }}</div>
-              <div
-                style="margin-top: 4px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sx-muted)">
-                {{ s.label }}</div>
+        <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(50%, 200px), 1fr)); border-top: 2px solid var(--line)">
+          <sc-for list="{{ counters }}" as="c" hint-placeholder-count="4">
+            <div style="padding: clamp(16px, 3vw, 28px) clamp(16px, 3vw, 32px); border-right: 2px solid var(--line); border-bottom: 2px solid var(--line); margin-bottom: -2px; background: var(--bg2)">
+              <div style="font-family: var(--fh); font-weight: 800; font-size: clamp(22px, 4vw, 38px)">{{ c.shown }}</div>
+              <div style="margin-top: 6px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mute)">{{ c.label }}</div>
             </div>
           </sc-for>
         </div>
       </section>
 
-      <div
-        style="overflow: hidden; border-bottom: 2px solid var(--sx-line); background: #dd0506; color: var(--sx-onaccent)">
-        <div style="display: flex; width: max-content; animation: sxTicker 26s linear infinite">
+      <div style="overflow: hidden; border-bottom: 2px solid var(--line); background: #dd0506; color: #fff">
+        <div style="display: flex; width: max-content; animation: sxTicker 30s linear infinite">
           <sc-for list="{{ tickerRuns }}" as="run" hint-placeholder-count="2">
-            <div
-              style="display: flex; gap: var(--space-8); padding: 12px var(--space-8); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap">
-              <sc-for list="{{ run.items }}" as="t" hint-placeholder-count="6">
-                <span>{{ t }}</span>
-              </sc-for>
+            <div style="display: flex; gap: 40px; padding: 12px 20px; font-family: var(--fh); font-weight: 700; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap">
+              <sc-for list="{{ run.items }}" as="t" hint-placeholder-count="8"><span>{{ t }}</span></sc-for>
             </div>
           </sc-for>
         </div>
       </div>
 
-      <section id="mahsulotlar" style="border-bottom: 2px solid var(--sx-line); background: var(--sx-bg)">
-        <div style="max-width: 1480px; margin: 0 auto; padding: clamp(40px, 6vw, 88px) clamp(16px, 4vw, 48px)">
-          <div
-            style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-6)">
-            <div>
-              <div style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">01 — Katalog
-              </div>
-              <h2
-                style="margin: var(--space-3) 0 0; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(30px, 4.4vw, 60px); line-height: 1; letter-spacing: 0; text-transform: uppercase">
-                Mahsulot liniyasi</h2>
-            </div>
-            <p style="max-width: 40ch; margin: 0; font-size: 14px; line-height: 1.6; color: var(--sx-muted)">Har bir
-              pozitsiya zavod laboratoriyasida partiyalab sinovdan o’tadi. Kartochka ustiga kursorni olib borsangiz
-              texnik parametrlar ochiladi.</p>
-          </div>
-
-          <div
-            style="display: flex; flex-wrap: wrap; gap: 0; margin-top: var(--space-8); border: 2px solid var(--sx-line); width: fit-content; max-width: 100%">
-            <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
-              <button type="button" onClick="{{ t.onClick }}"
-                style="padding: 12px 20px; border: 0; border-right: 2px solid var(--sx-line); background: {{ t.bg }}; color: {{ t.fg }}; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; cursor: pointer">{{
-                t.label }}</button>
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(40px, 8vw, 96px) clamp(16px, 4vw, 48px)">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">01 &mdash; Yo&rsquo;nalishlar</div>
+          <h2 style="margin: 8px 0 28px; font-family: var(--fh); font-weight: 800; font-size: clamp(24px, 6vw, 52px); line-height: 1.05; text-transform: uppercase">Mahsulot toifalari</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); border-top: 2px solid var(--line); border-left: 2px solid var(--line)">
+            <sc-for list="{{ catTiles }}" as="c" hint-placeholder-count="5">
+              <a href="#/katalog" onClick="{{ c.onClick }}" style="display: flex; flex-direction: column; gap: 10px; min-height: 180px; padding: 20px; border-right: 2px solid var(--line); border-bottom: 2px solid var(--line); background: var(--bg2); color: var(--ink); transition: background .2s ease" style-hover="background:var(--surf);color:var(--ink)">
+                <span style="font-family: var(--fh); font-weight: 700; font-size: 12px; color: #dd0506">{{ c.no }}</span>
+                <span style="font-family: var(--fh); font-weight: 800; font-size: 19px; line-height: 1.15; text-transform: uppercase">{{ c.name }}</span>
+                <span style="font-size: 13px; color: var(--mute)">{{ c.count }}</span>
+                <span style="margin-top: auto; font-family: var(--fh); font-weight: 700; font-size: 14px">{{ c.from }}</span>
+              </a>
             </sc-for>
           </div>
+        </div>
+      </section>
 
-          <div
-            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-4); margin-top: var(--space-6)">
-            <sc-for list="{{ visibleProducts }}" as="p" hint-placeholder-count="6">
-              <article onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" onClick="{{ p.onOpen }}"
-                style="position: relative; display: flex; flex-direction: column; min-height: 340px; padding: var(--space-6); border: 2px solid {{ p.border }}; background: linear-gradient(160deg, var(--sx-surface), var(--sx-bg2)); overflow: hidden; cursor: pointer; transform: {{ p.transform }}; transition: transform .25s ease, border-color .25s ease">
-                <div
-                  style="position: absolute; inset: 0; background-image: linear-gradient(var(--sx-grid) 1px, transparent 1px), linear-gradient(90deg, var(--sx-grid) 1px, transparent 1px); background-size: 28px 28px">
+      <section style="border-bottom: 2px solid var(--line); background: var(--bg2)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(40px, 8vw, 96px) clamp(16px, 4vw, 48px)">
+          <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 28px">
+            <div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">02 &mdash; Suyuq beton</div>
+              <h2 style="margin: 8px 0 0; font-family: var(--fh); font-weight: 800; font-size: clamp(24px, 6vw, 52px); line-height: 1.05; text-transform: uppercase">Narxlar, m&sup3;</h2>
+            </div>
+            <p style="max-width: 38ch; margin: 0; font-size: 14px; line-height: 1.6; color: var(--mute)">0&ndash;15 km yetkazish narxga kiritilgan. Oktabr 2026 narxlari.</p>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(50%, 150px), 1fr)); border-top: 2px solid var(--line); border-left: 2px solid var(--line)">
+            <sc-for list="{{ gradeChips }}" as="g" hint-placeholder-count="9">
+              <a href="#/mahsulot/beton" style="display: block; padding: 16px; border-right: 2px solid var(--line); border-bottom: 2px solid var(--line); background: var(--bg)" style-hover="background:var(--surf)">
+                <div style="font-family: var(--fh); font-weight: 800; font-size: 20px; color: #dd0506">{{ g.mark }}</div>
+                <div style="font-size: 11px; color: var(--mute); margin-top: 2px">{{ g.cls }}</div>
+                <div style="margin-top: 12px; font-family: var(--fh); font-weight: 700; font-size: 14px; color: var(--ink)">{{ g.price }}</div>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(40px, 8vw, 96px) clamp(16px, 4vw, 48px)">
+          <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 28px">
+            <div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">03 &mdash; Ommabop</div>
+              <h2 style="margin: 8px 0 0; font-family: var(--fh); font-weight: 800; font-size: clamp(24px, 6vw, 52px); line-height: 1.05; text-transform: uppercase">Ko&rsquo;p so&rsquo;raladi</h2>
+            </div>
+            <a href="#/katalog" style="font-family: var(--fh); font-weight: 700; font-size: 13px; color: #dd0506">Butun katalog &rarr;</a>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 12px">
+            <sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
+              <a href="{{ p.href }}" style="display: flex; flex-direction: column; border: 2px solid var(--line); background: var(--bg2); color: var(--ink); transition: border-color .2s ease, transform .2s ease" style-hover="borderColor:#dd0506;transform:translateY(-4px);color:var(--ink)">
+                <div style="position: relative; display: flex; align-items: flex-end; height: 140px; padding: 16px; border-bottom: 2px solid var(--line); background-color: var(--surf); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 24px 24px">
+                  <span style="position: absolute; top: 14px; left: 16px; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mute)">{{ p.catName }}</span>
+                  <span style="font-family: var(--fh); font-weight: 900; font-size: clamp(30px, 5vw, 44px); line-height: 1; color: #dd0506">{{ p.code }}</span>
                 </div>
-                <div
-                  style="position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4)">
-                  <div
-                    style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #dd0506">
-                    {{ p.kicker }}</div>
-                  <div
-                    style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 12px; color: var(--sx-muted)">
-                    {{ p.code }}</div>
-                </div>
-                <h3
-                  style="position: relative; margin: var(--space-4) 0 0; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(20px, 1.8vw, 26px); line-height: 1.08; letter-spacing: 0">
-                  {{ p.title }}</h3>
-                <p
-                  style="position: relative; margin: var(--space-3) 0 0; font-size: 13px; line-height: 1.6; color: var(--sx-muted); filter: {{ p.blur }}; transition: filter .25s ease">
-                  {{ p.body }}</p>
-                <div
-                  style="position: relative; margin-top: auto; padding-top: var(--space-6); display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-4)">
-                  <div>
-                    <div
-                      style="font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">
-                      Narx</div>
-                    <div style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 18px">{{
-                      p.price }}</div>
+                <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; padding: 16px">
+                  <div style="font-family: var(--fh); font-weight: 800; font-size: 16px; line-height: 1.25">{{ p.name }}</div>
+                  <div style="font-size: 13px; line-height: 1.55; color: var(--mute)">{{ p.short }}</div>
+                  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 10px">
+                    <span style="font-family: var(--fh); font-weight: 800; font-size: 15px">{{ p.fromLabel }}</span>
+                    <span style="font-size: 12px; font-weight: 700; color: #dd0506">Batafsil &rarr;</span>
                   </div>
-                  <span
-                    style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #dd0506">Batafsil
-                    →</span>
                 </div>
-                <div
-                  style="position: absolute; left: 0; right: 0; bottom: 0; padding: var(--space-4) var(--space-6); background: var(--sx-hud); border-top: 2px solid #dd0506; opacity: {{ p.hud }}; transform: {{ p.hudShift }}; transition: opacity .25s ease, transform .25s ease; pointer-events: none">
-                  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3)">
-                    <sc-for list="{{ p.specs }}" as="sp" hint-placeholder-count="4">
-                      <div>
-                        <div
-                          style="font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">
-                          {{ sp.k }}</div>
-                        <div
-                          style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px; color: var(--sx-ink)">
-                          {{ sp.v }}</div>
-                      </div>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="border-bottom: 2px solid var(--line); background: var(--bg2)">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); max-width: 1440px; margin: 0 auto">
+          <div style="padding: clamp(40px, 7vw, 80px) clamp(16px, 4vw, 48px)">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">04 &mdash; Yetkazish</div>
+            <h2 style="margin: 8px 0 16px; font-family: var(--fh); font-weight: 800; font-size: clamp(24px, 6vw, 52px); line-height: 1.05; text-transform: uppercase">50 km radius</h2>
+            <p style="max-width: 44ch; margin: 0 0 24px; font-size: 15px; line-height: 1.6; color: var(--mute)">Qo&rsquo;qon, Uchko&rsquo;prik, Yaypan, Beshariq, Rishton, Bag&rsquo;dod &mdash; avtomikserlar va manipulyatorlar 24/7 chiqadi.</p>
+            <a href="#/yetkazish" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border: 2px solid var(--line); font-family: var(--fh); font-weight: 700; font-size: 13px" style-hover="borderColor:#dd0506">Yetkazish xaritasi &rarr;</a>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-left: 2px solid var(--line)">
+            <sc-for list="{{ towns }}" as="t" hint-placeholder-count="6">
+              <div style="padding: 20px clamp(16px, 3vw, 28px); border-right: 2px solid var(--line); border-bottom: 2px solid var(--line)">
+                <div style="font-family: var(--fh); font-weight: 800; font-size: clamp(20px, 3vw, 28px)">{{ t.km }}</div>
+                <div style="margin-top: 4px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--mute)">{{ t.name }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(40px, 8vw, 96px) clamp(16px, 4vw, 48px)">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">05 &mdash; Ishonch</div>
+          <h2 style="margin: 8px 0 28px; font-family: var(--fh); font-weight: 800; font-size: clamp(24px, 6vw, 52px); line-height: 1.05; text-transform: uppercase">Sifat nazorati</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 12px">
+            <sc-for list="{{ certs }}" as="c" hint-placeholder-count="4">
+              <div style="display: flex; flex-direction: column; gap: 10px; padding: 20px; border: 2px solid var(--line); background: var(--bg2)">
+                <div style="font-family: var(--fh); font-weight: 800; font-size: 13px; letter-spacing: .08em; color: #dd0506">{{ c.badge }}</div>
+                <div style="font-family: var(--fh); font-weight: 700; font-size: 16px; line-height: 1.25">{{ c.title }}</div>
+                <div style="font-size: 13px; line-height: 1.6; color: var(--mute)">{{ c.body }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="border-bottom: 2px solid var(--line); background: var(--bg2)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(40px, 8vw, 96px) clamp(16px, 4vw, 48px)">
+          <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 24px">
+            <div>
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">06 &mdash; Blog</div>
+              <h2 style="margin: 8px 0 0; font-family: var(--fh); font-weight: 800; font-size: clamp(24px, 6vw, 52px); line-height: 1.05; text-transform: uppercase">Quruvchiga maslahat</h2>
+            </div>
+            <a href="#/blog" style="font-family: var(--fh); font-weight: 700; font-size: 13px; color: #dd0506">Barcha maqolalar &rarr;</a>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px">
+            <sc-for list="{{ homePosts }}" as="b" hint-placeholder-count="3">
+              <a href="{{ b.href }}" style="display: flex; flex-direction: column; gap: 10px; padding: 20px; border: 2px solid var(--line); background: var(--bg); color: var(--ink)" style-hover="borderColor:#dd0506;color:var(--ink)">
+                <span style="display: flex; justify-content: space-between; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mute)"><span style="color: #dd0506">{{ b.tag }}</span><span>{{ b.meta }}</span></span>
+                <span style="font-family: var(--fh); font-weight: 800; font-size: 17px; line-height: 1.3">{{ b.title }}</span>
+                <span style="font-size: 14px; line-height: 1.55; color: var(--mute)">{{ b.excerpt }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="background: #dd0506; color: #fff">
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; max-width: 1440px; margin: 0 auto; padding: clamp(40px, 8vw, 88px) clamp(16px, 4vw, 48px)">
+          <div style="font-family: var(--fh); font-weight: 900; font-size: clamp(30px, 7vw, 80px); line-height: .98; text-transform: uppercase">Narxni<br>15 daqiqada<br>oling.</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px">
+            <a href="{{ phoneHref }}" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 22px; background: #0D0F12; color: #fff; font-family: var(--fh); font-weight: 700; font-size: 15px" style-hover="background:#fff;color:#0D0F12">{{ phone }}</a>
+            <a href="#/aloqa" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 22px; border: 2px solid #fff; color: #fff; font-family: var(--fh); font-weight: 700; font-size: 15px" style-hover="background:#fff;color:#dd0506">So&rsquo;rov qoldirish &rarr;</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isCatalog }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Katalog" style="animation: sxRise .45s ease both">
+      <section style="border-bottom: 2px solid var(--line); background: var(--bg2)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(28px, 6vw, 64px) clamp(16px, 4vw, 48px) 20px">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--mute)"><a href="#/">Bosh sahifa</a> / <span style="color: #dd0506">Katalog</span></div>
+          <h1 style="margin: 10px 0 8px; font-family: var(--fh); font-weight: 900; font-size: clamp(32px, 8vw, 80px); line-height: 1; text-transform: uppercase">Katalog</h1>
+          <p style="margin: 0 0 20px; font-size: 14px; color: var(--mute)">{{ catalogCount }} &middot; Narxlar Oktabr 2026, QQS bilan</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 10px">
+            <label style="position: relative; display: block">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 14px; top: 15px; color: var(--mute)"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <input type="search" value="{{ q }}" onInput="{{ onSearch }}" placeholder="Qidirish: plita, M300, lotok..." style="width: 100%; min-height: 48px; padding: 12px 14px 12px 44px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-size: 16px" style-focus="borderColor:#dd0506;outline:none">
+            </label>
+            <select value="{{ sort }}" onChange="{{ onSort }}" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-size: 15px">
+              <option value="pop">Saralash: ommabop</option>
+              <option value="asc">Narx: arzondan</option>
+              <option value="desc">Narx: qimmatdan</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <div style="position: sticky; top: 66px; z-index: 30; background: var(--bg2); border-bottom: 2px solid var(--line)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: 8px clamp(16px, 4vw, 48px)">
+          <div style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none">
+            <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+              <button type="button" onClick="{{ t.onClick }}" style="flex: none; min-height: 44px; padding: 0 14px; border: 2px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.fg }}; font-family: var(--fh); font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; cursor: pointer">{{ t.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 48px) clamp(40px, 7vw, 80px)">
+          <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 40px 0; font-size: 15px; color: var(--mute)">Hech narsa topilmadi. Boshqa so&rsquo;z bilan qidiring yoki <a href="#/aloqa" style="color: #dd0506">so&rsquo;rov qoldiring</a>.</div>
+          </sc-if>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 12px">
+            <sc-for list="{{ catalog }}" as="p" hint-placeholder-count="6">
+              <a href="{{ p.href }}" style="display: flex; flex-direction: column; border: 2px solid var(--line); background: var(--bg2); color: var(--ink); transition: border-color .2s ease, transform .2s ease" style-hover="borderColor:#dd0506;transform:translateY(-4px);color:var(--ink)">
+                <div style="position: relative; display: flex; align-items: flex-end; height: 150px; padding: 16px; border-bottom: 2px solid var(--line); background-color: var(--surf); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 24px 24px">
+                  <span style="position: absolute; top: 14px; left: 16px; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mute)">{{ p.catName }}</span>
+                  <span style="position: absolute; top: 12px; right: 14px; font-size: 11px; font-weight: 700; color: var(--mute)">{{ p.varCount }}</span>
+                  <span style="font-family: var(--fh); font-weight: 900; font-size: clamp(28px, 5vw, 42px); line-height: 1; color: #dd0506">{{ p.code }}</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; padding: 16px">
+                  <div style="font-family: var(--fh); font-weight: 800; font-size: 16px; line-height: 1.25">{{ p.name }}</div>
+                  <div style="font-size: 13px; line-height: 1.55; color: var(--mute)">{{ p.short }}</div>
+                  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 6px; padding-top: 10px; border-top: 2px solid var(--line)">
+                    <sc-for list="{{ p.specs2 }}" as="sp" hint-placeholder-count="2">
+                      <div><div style="font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute)">{{ sp.k }}</div><div style="font-size: 13px; font-weight: 700; margin-top: 2px">{{ sp.v }}</div></div>
                     </sc-for>
                   </div>
+                  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 12px">
+                    <span style="font-family: var(--fh); font-weight: 800; font-size: 15px">{{ p.fromLabel }}</span>
+                    <span style="font-size: 12px; font-weight: 700; color: #dd0506">Batafsil &rarr;</span>
+                  </div>
                 </div>
-              </article>
+              </a>
             </sc-for>
           </div>
         </div>
       </section>
+    </main>
+  </sc-if>
 
-      <section id="kalkulyator" style="border-bottom: 2px solid var(--sx-line); background: var(--sx-bg2)">
-        <div
-          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 1480px; margin: 0 auto">
-          <div style="padding: clamp(32px, 5vw, 80px) clamp(16px, 4vw, 48px); border-right: 2px solid var(--sx-line)">
-            <div style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">02 —
-              Kalkulyator</div>
-            <h2
-              style="margin: var(--space-3) 0 var(--space-4); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.02; letter-spacing: 0; text-transform: uppercase">
-              Beton hajmi va smeta</h2>
-            <p
-              style="max-width: 44ch; margin: 0 0 var(--space-8); font-size: 14px; line-height: 1.6; color: var(--sx-muted)">
-              O’lchamlarni kiriting — tizim kerakli beton markasi, fraksiya va taxminiy narxni hisoblaydi.</p>
-
-            <div
-              style="display: flex; border: 2px solid var(--sx-line); width: fit-content; margin-bottom: var(--space-6)">
-              <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
-                <button type="button" onClick="{{ m.onClick }}"
-                  style="padding: 12px 20px; border: 0; border-right: 2px solid var(--sx-line); background: {{ m.bg }}; color: {{ m.fg }}; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; cursor: pointer">{{
-                  m.label }}</button>
-              </sc-for>
+  <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Mahsulot" style="animation: sxRise .45s ease both">
+      <div style="position: sticky; top: 66px; z-index: 30; background: var(--bg2); border-bottom: 2px solid var(--line)">
+        <div style="display: flex; gap: 0; max-width: 1440px; margin: 0 auto; padding: 0 clamp(8px, 4vw, 48px); overflow-x: auto; scrollbar-width: none">
+          <sc-for list="{{ pr.jumps }}" as="j" hint-placeholder-count="4">
+            <button type="button" onClick="{{ j.onClick }}" style="flex: none; min-height: 46px; padding: 0 12px; border: 0; border-bottom: 3px solid {{ j.line }}; background: transparent; color: {{ j.color }}; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; cursor: pointer">{{ j.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: 20px clamp(16px, 4vw, 48px) 0">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mute)"><a href="#/">Bosh sahifa</a> / <a href="#/katalog">Katalog</a> / <span style="color: #dd0506">{{ pr.code }}</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: clamp(20px, 4vw, 48px); max-width: 1440px; margin: 0 auto; padding: 20px clamp(16px, 4vw, 48px) clamp(32px, 6vw, 64px)">
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <div style="position: relative; aspect-ratio: 4 / 3; border: 2px solid var(--line); background: var(--surf)">
+              <image-slot id="{{ pr.slotId }}" shape="rect" placeholder="Mahsulot fotosuratini shu yerga tashlang"></image-slot>
             </div>
-
-            <div style="display: flex; flex-direction: column; gap: var(--space-6)">
-              <sc-for list="{{ sliders }}" as="sl" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border: 2px solid var(--line); background: var(--bg2)">
+              <span style="font-family: var(--fh); font-weight: 900; font-size: 28px; color: #dd0506">{{ pr.code }}</span>
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">{{ pr.catName }}</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 18px">
+            <h1 style="margin: 0; font-family: var(--fh); font-weight: 900; font-size: clamp(26px, 5vw, 48px); line-height: 1.05; text-transform: uppercase; text-wrap: balance">{{ pr.name }}</h1>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--mute); text-wrap: pretty">{{ pr.short }}</p>
+            <div id="p-joy">
+              <div style="margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Qayerda ishlatiladi</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                <sc-for list="{{ pr.useList }}" as="u" hint-placeholder-count="4"><span style="padding: 7px 10px; border: 2px solid var(--line); font-size: 13px">{{ u.t }}</span></sc-for>
+              </div>
+            </div>
+            <sc-if value="{{ pr.hasVariants }}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; flex-direction: column; gap: 14px; padding: 18px; border: 2px solid var(--line); background: var(--bg2)">
                 <label style="display: block">
-                  <span
-                    style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-3)">
-                    <span
-                      style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">{{
-                      sl.label }}</span>
-                    <span
-                      style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 20px; color: #dd0506">{{
-                      sl.display }}</span>
-                  </span>
-                  <input type="range" min="{{ sl.min }}" max="{{ sl.max }}" step="{{ sl.step }}" value="{{ sl.value }}"
-                    onChange="{{ sl.onChange }}" style="width: 100%; display: block">
+                  <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Turi / o&rsquo;lchami</span>
+                  <select value="{{ sel }}" onChange="{{ onSel }}" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-size: 16px">
+                    <sc-for list="{{ pr.options }}" as="o" hint-placeholder-count="4"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  </select>
                 </label>
-              </sc-for>
-              <label style="display: block">
-                <span
-                  style="display: block; margin-bottom: var(--space-3); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">Ishlar
-                  turi</span>
-                <select value="{{ workType }}" onChange="{{ onWorkType }}"
-                  style="width: 100%; padding: 14px; border: 2px solid var(--sx-line); background: var(--sx-bg); color: var(--sx-ink); font-size: 14px">
-                  <option value="poydevor">Poydevor / fundament</option>
-                  <option value="monolit">Monolit ustun va to’sin</option>
-                  <option value="pol">Pol va maydoncha</option>
-                  <option value="plita">Plita ostidagi tayyorgarlik</option>
-                </select>
-              </label>
-            </div>
-          </div>
-
-          <div style="padding: clamp(32px, 5vw, 80px) clamp(16px, 4vw, 48px); background: var(--sx-bg)">
-            <div
-              style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-4); border-bottom: 2px solid var(--sx-line)">
-              <span
-                style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">Umumiy
-                hajm</span>
-              <span
-                style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(40px, 6vw, 76px); line-height: 1; letter-spacing: 0; color: #dd0506">{{
-                volume }}</span>
-            </div>
-            <div
-              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-left: 2px solid var(--sx-line); border-bottom: 2px solid var(--sx-line)">
-              <sc-for list="{{ results }}" as="r" hint-placeholder-count="4">
-                <div
-                  style="padding: var(--space-4); border-right: 2px solid var(--sx-line); border-top: 2px solid var(--sx-line)">
-                  <div
-                    style="font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">{{
-                    r.k }}</div>
-                  <div
-                    style="margin-top: 6px; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 17px">
-                    {{ r.v }}</div>
-                </div>
-              </sc-for>
-            </div>
-            <div
-              style="margin-top: var(--space-8); padding: var(--space-6); border: 2px solid #dd0506; background: var(--sx-surface)">
-              <div style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">
-                Taxminiy smeta (yetkazish bilan)</div>
-              <div
-                style="margin-top: var(--space-2); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(28px, 3.4vw, 44px); letter-spacing: 0">
-                {{ estimate }}</div>
-              <div style="margin-top: var(--space-2); font-size: 12px; color: var(--sx-muted)">{{ estimateNote }}</div>
-              <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6)">
-                <a href="#aloqa"
-                  style="display: inline-flex; align-items: center; padding: 15px 20px; background: #dd0506; color: var(--sx-onaccent); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px"
-                  style-hover="background:var(--sx-ink);color:var(--sx-bg)">Buyurtma berish</a>
-                <button type="button" onClick="{{ onPdf }}"
-                  style="display: inline-flex; align-items: center; padding: 15px 20px; border: 2px solid var(--sx-line); background: transparent; color: var(--sx-ink); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px; cursor: pointer"
-                  style-hover="borderColor:#dd0506">{{ pdfLabel }}</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="quvvat" style="border-bottom: 2px solid var(--sx-line); background: var(--sx-bg)">
-        <div style="max-width: 1480px; margin: 0 auto; padding: clamp(40px, 6vw, 88px) clamp(16px, 4vw, 48px)">
-          <div style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">03 — Quvvat va
-            logistika</div>
-          <h2
-            style="margin: var(--space-3) 0 var(--space-8); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(28px, 4vw, 56px); line-height: 1; letter-spacing: 0; text-transform: uppercase">
-            Zavod raqamlarda</h2>
-
-          <div ref="{{ countRef }}"
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border-top: 2px solid var(--sx-line); border-left: 2px solid var(--sx-line)">
-            <sc-for list="{{ counters }}" as="c" hint-placeholder-count="4">
-              <div
-                style="padding: var(--space-6); border-right: 2px solid var(--sx-line); border-bottom: 2px solid var(--sx-line); background: var(--sx-bg2)">
-                <div
-                  style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(34px, 4.4vw, 60px); line-height: 1; letter-spacing: 0">
-                  {{ c.shown }}</div>
-                <div
-                  style="margin-top: var(--space-3); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sx-muted)">
-                  {{ c.label }}</div>
-              </div>
-            </sc-for>
-          </div>
-
-          <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8); margin-top: var(--space-8); align-items: center">
-            <div
-              style="position: relative; aspect-ratio: 1; max-width: 520px; width: 100%; border: 2px solid var(--sx-line); background: var(--sx-bg2); display: grid; place-items: center; overflow: hidden">
-              <div
-                style="position: absolute; inset: 0; background-image: linear-gradient(var(--sx-grid) 1px, transparent 1px), linear-gradient(90deg, var(--sx-grid) 1px, transparent 1px); background-size: 40px 40px">
-              </div>
-              <div
-                style="position: absolute; width: 82%; aspect-ratio: 1; border: 2px solid #dd050633; border-radius: 50%">
-              </div>
-              <div
-                style="position: absolute; width: 56%; aspect-ratio: 1; border: 2px solid #dd050644; border-radius: 50%">
-              </div>
-              <div
-                style="position: absolute; width: 30%; aspect-ratio: 1; border: 2px solid #dd050666; border-radius: 50%">
-              </div>
-              <div
-                style="position: absolute; width: 82%; aspect-ratio: 1; border: 2px solid #dd0506; border-radius: 50%; animation: sxPulse 3.4s ease-out infinite">
-              </div>
-              <div
-                style="position: absolute; width: 82%; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(from 0deg, #dd050600 0deg, #dd050633 60deg, #dd050600 70deg); animation: sxSweep 6s linear infinite">
-              </div>
-              <div
-                style="position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; background: #dd0506">
-              </div>
-              <div
-                style="position: absolute; left: 50%; top: 50%; margin: -34px 0 0 -7px; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap">
-                STONMAX</div>
-              <sc-for list="{{ mapPoints }}" as="mp" hint-placeholder-count="5">
-                <div
-                  style="position: absolute; left: {{ mp.left }}; top: {{ mp.top }}; display: flex; flex-direction: {{ mp.dir }}; align-items: center; gap: 7px; transform: translate({{ mp.shift }}, -50%)">
-                  <span style="width: 8px; height: 8px; background: var(--sx-ink); flex: none"></span>
-                  <span
-                    style="font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--sx-muted); white-space: nowrap">{{
-                    mp.name }}</span>
-                </div>
-              </sc-for>
-              <div
-                style="position: absolute; left: var(--space-4); bottom: var(--space-4); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">
-                Yetkazish radiusi — {{ radius }} km</div>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: var(--space-4)">
-              <sc-for list="{{ logistics }}" as="l" hint-placeholder-count="4">
-                <div
-                  style="display: flex; gap: var(--space-4); padding-bottom: var(--space-4); border-bottom: 2px solid var(--sx-line)">
-                  <div
-                    style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 12px; color: #dd0506; min-width: 34px">
-                    {{ l.no }}</div>
+                <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
                   <div>
-                    <div style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 16px">{{
-                      l.title }}</div>
-                    <div style="margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--sx-muted)">{{ l.body }}
+                    <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Miqdor, {{ pr.unit }}</span>
+                    <div style="display: flex; border: 2px solid var(--line)">
+                      <button type="button" onClick="{{ qtyDec }}" aria-label="Kamaytirish" style="width: 48px; height: 48px; border: 0; border-right: 2px solid var(--line); background: transparent; color: var(--ink); font-size: 20px; cursor: pointer">&minus;</button>
+                      <input type="number" min="1" value="{{ qty }}" onChange="{{ onQty }}" style="width: 72px; height: 48px; border: 0; background: var(--bg); color: var(--ink); font-family: var(--fh); font-weight: 700; font-size: 16px; text-align: center">
+                      <button type="button" onClick="{{ qtyInc }}" aria-label="Ko'paytirish" style="width: 48px; height: 48px; border: 0; border-left: 2px solid var(--line); background: transparent; color: var(--ink); font-size: 20px; cursor: pointer">+</button>
                     </div>
                   </div>
+                  <div style="text-align: right">
+                    <div style="font-size: 12px; color: var(--mute)">{{ unitPrice }}</div>
+                    <div style="font-family: var(--fh); font-weight: 900; font-size: clamp(24px, 4vw, 34px); color: var(--ink)">{{ lineTotal }}</div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ pr.noVariants }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 18px; border: 2px solid var(--line); background: var(--bg2)">
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Narx</div>
+                <div style="margin-top: 6px; font-family: var(--fh); font-weight: 800; font-size: 22px">So&rsquo;rov bo&rsquo;yicha</div>
+                <div style="margin-top: 6px; font-size: 13px; color: var(--mute)">Hajm va masofaga qarab menejer hisoblab beradi.</div>
+              </div>
+            </sc-if>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); gap: 8px">
+              <button type="button" onClick="{{ orderProduct }}" style="display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 0 20px; border: 0; background: #dd0506; color: #fff; font-family: var(--fh); font-weight: 700; font-size: 14px; cursor: pointer" style-hover="background:#b30405">Buyurtma berish <span>&rarr;</span></button>
+              <a href="{{ tgHref }}" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 10px; min-height: 54px; padding: 0 20px; border: 2px solid var(--line); font-family: var(--fh); font-weight: 700; font-size: 14px" style-hover="borderColor:#dd0506">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                Telegram
+              </a>
+            </div>
+            <div id="p-param" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px solid var(--line); border-left: 2px solid var(--line)">
+              <sc-for list="{{ pr.specList }}" as="sp" hint-placeholder-count="6">
+                <div style="padding: 12px 14px; border-right: 2px solid var(--line); border-bottom: 2px solid var(--line)">
+                  <div style="font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mute)">{{ sp.k }}</div>
+                  <div style="margin-top: 4px; font-size: 14px; font-weight: 700">{{ sp.v }}</div>
                 </div>
               </sc-for>
             </div>
           </div>
         </div>
       </section>
-
-      <section id="sertifikat" style="border-bottom: 2px solid var(--sx-line); background: var(--sx-bg2)">
-        <div style="max-width: 1480px; margin: 0 auto; padding: clamp(40px, 6vw, 88px) clamp(16px, 4vw, 48px)">
-          <div style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">04 — Ishonch
+      <section id="p-tavsif" style="border-bottom: 2px solid var(--line); background: var(--bg2)">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: clamp(24px, 4vw, 56px); max-width: 1440px; margin: 0 auto; padding: clamp(32px, 6vw, 72px) clamp(16px, 4vw, 48px)">
+          <div>
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">Tavsif</div>
+            <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 14px">
+              <sc-for list="{{ pr.descList }}" as="d" hint-placeholder-count="2"><p style="margin: 0; font-size: 15px; line-height: 1.7; text-wrap: pretty">{{ d.t }}</p></sc-for>
+            </div>
           </div>
-          <h2
-            style="margin: var(--space-3) 0 var(--space-8); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(28px, 4vw, 56px); line-height: 1; letter-spacing: 0; text-transform: uppercase">
-            Sertifikat va laboratoriya</h2>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4)">
-            <sc-for list="{{ certs }}" as="c" hint-placeholder-count="4">
-              <div
-                style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6); border: 2px solid var(--sx-line); background: var(--sx-surface)">
-                <div
-                  style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #dd0506">
-                  {{ c.badge }}</div>
-                <div
-                  style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 18px; line-height: 1.15">
-                  {{ c.title }}</div>
-                <div style="font-size: 13px; line-height: 1.6; color: var(--sx-muted)">{{ c.body }}</div>
-              </div>
+          <div>
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">Qo&rsquo;llanilishi</div>
+            <div style="margin-top: 14px; border-top: 2px solid var(--line)">
+              <sc-for list="{{ pr.useList }}" as="u" hint-placeholder-count="4">
+                <div style="display: flex; gap: 14px; padding: 14px 0; border-bottom: 2px solid var(--line); font-size: 15px"><span style="font-family: var(--fh); font-weight: 700; font-size: 12px; color: #dd0506; min-width: 24px">{{ u.no }}</span>{{ u.t }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+      <sc-if value="{{ pr.hasVariants }}" hint-placeholder-val="{{ true }}">
+        <section style="border-bottom: 2px solid var(--line)">
+          <div style="max-width: 1440px; margin: 0 auto; padding: clamp(32px, 6vw, 72px) clamp(16px, 4vw, 48px)">
+            <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 18px">
+              <h2 id="p-jadval" style="margin: 0; font-family: var(--fh); font-weight: 800; font-size: clamp(22px, 5vw, 40px); text-transform: uppercase">Narxlar jadvali</h2>
+              <span style="font-size: 13px; color: var(--mute)">Oktabr 2026 &middot; {{ pr.varCount }}</span>
+            </div>
+            <div style="border: 2px solid var(--line); overflow-x: auto">
+              <table style="width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14px">
+                <thead>
+                  <tr style="background: var(--bg2)">
+                    <sc-for list="{{ pr.cols }}" as="c" hint-placeholder-count="4"><th style="text-align: left; padding: 12px 14px; border-bottom: 2px solid var(--line); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); white-space: nowrap">{{ c }}</th></sc-for>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{ pr.rows }}" as="r" hint-placeholder-count="6">
+                    <tr onClick="{{ r.onClick }}" style="cursor: pointer; background: {{ r.bg }}">
+                      <sc-for list="{{ r.cells }}" as="cell" hint-placeholder-count="3"><td style="padding: 12px 14px; border-bottom: 2px solid var(--line)">{{ cell }}</td></sc-for>
+                      <td style="padding: 12px 14px; border-bottom: 2px solid var(--line); font-family: var(--fh); font-weight: 700; color: {{ r.priceColor }}; white-space: nowrap">{{ r.price }}</td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+            <p style="margin: 14px 0 0; font-size: 13px; line-height: 1.6; color: var(--mute)">{{ pr.note }}</p>
+          </div>
+        </section>
+      </sc-if>
+      <section style="border-bottom: 2px solid var(--line); background: var(--bg2)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(32px, 6vw, 72px) clamp(16px, 4vw, 48px)">
+          <h2 style="margin: 0 0 18px; font-family: var(--fh); font-weight: 800; font-size: clamp(20px, 4vw, 32px); text-transform: uppercase">O&rsquo;xshash mahsulotlar</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 12px">
+            <sc-for list="{{ related }}" as="p" hint-placeholder-count="3">
+              <a href="{{ p.href }}" style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border: 2px solid var(--line); background: var(--bg); color: var(--ink)" style-hover="borderColor:#dd0506;color:var(--ink)">
+                <span style="font-family: var(--fh); font-weight: 900; font-size: 24px; color: #dd0506">{{ p.code }}</span>
+                <span style="font-family: var(--fh); font-weight: 700; font-size: 14px; line-height: 1.3">{{ p.name }}</span>
+                <span style="font-size: 13px; color: var(--mute)">{{ p.fromLabel }}</span>
+              </a>
             </sc-for>
           </div>
-          <div style="margin-top: var(--space-8); border: 2px solid var(--sx-line); overflow-x: auto">
-            <table class="table" style="width: 100%; min-width: 560px; border-collapse: collapse; color: var(--sx-ink)">
-              <thead>
-                <tr style="background: var(--sx-bg)">
-                  <th
-                    style="text-align: left; padding: var(--space-4); border-bottom: 2px solid var(--sx-line); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sx-muted)">
-                    Marka</th>
-                  <th
-                    style="text-align: left; padding: var(--space-4); border-bottom: 2px solid var(--sx-line); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sx-muted)">
-                    Mustahkamlik</th>
-                  <th
-                    style="text-align: left; padding: var(--space-4); border-bottom: 2px solid var(--sx-line); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sx-muted)">
-                    Sovuqbardoshlik</th>
-                  <th
-                    style="text-align: left; padding: var(--space-4); border-bottom: 2px solid var(--sx-line); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sx-muted)">
-                    Qo’llanishi</th>
-                </tr>
-              </thead>
-              <tbody>
-                <sc-for list="{{ grades }}" as="g" hint-placeholder-count="5">
-                  <tr>
-                    <td
-                      style="padding: var(--space-4); border-bottom: 2px solid var(--sx-line); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 15px; color: #dd0506">
-                      {{ g.mark }}</td>
-                    <td style="padding: var(--space-4); border-bottom: 2px solid var(--sx-line); font-size: 14px">{{
-                      g.strength }}</td>
-                    <td style="padding: var(--space-4); border-bottom: 2px solid var(--sx-line); font-size: 14px">{{
-                      g.frost }}</td>
-                    <td
-                      style="padding: var(--space-4); border-bottom: 2px solid var(--sx-line); font-size: 14px; color: var(--sx-muted)">
-                      {{ g.use }}</td>
-                  </tr>
-                </sc-for>
-              </tbody>
-            </table>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isCalc }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Kalkulyator" style="animation: sxRise .45s ease both">
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(28px, 6vw, 64px) clamp(16px, 4vw, 48px) 24px">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--mute)"><a href="#/">Bosh sahifa</a> / <span style="color: #dd0506">Kalkulyator</span></div>
+          <h1 style="margin: 10px 0 8px; font-family: var(--fh); font-weight: 900; font-size: clamp(30px, 7vw, 72px); line-height: 1; text-transform: uppercase">Smeta kalkulyatori</h1>
+          <p style="max-width: 54ch; margin: 0 0 20px; font-size: 15px; line-height: 1.6; color: var(--mute)">Narxlar zavod prays-varag&rsquo;idan (Oktabr 2026) olinadi. Yakuniy smetani menejer tasdiqlaydi.</p>
+          <div style="display: flex; border: 2px solid var(--line); width: fit-content; max-width: 100%">
+            <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
+              <button type="button" onClick="{{ m.onClick }}" style="min-height: 46px; padding: 0 18px; border: 0; border-right: 2px solid var(--line); background: {{ m.bg }}; color: {{ m.fg }}; font-family: var(--fh); font-weight: 700; font-size: 12px; text-transform: uppercase; cursor: pointer">{{ m.label }}</button>
+            </sc-for>
           </div>
         </div>
       </section>
-
-      <section id="aloqa" style="background: var(--sx-bg); border-bottom: 2px solid var(--sx-line)">
-        <div
-          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 1480px; margin: 0 auto">
-          <div style="padding: clamp(32px, 5vw, 80px) clamp(16px, 4vw, 48px); border-right: 2px solid var(--sx-line)">
-            <div style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #dd0506">05 — Aloqa
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); max-width: 1440px; margin: 0 auto">
+          <div style="display: flex; flex-direction: column; gap: 24px; padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 48px); border-right: 2px solid var(--line)">
+            <sc-for list="{{ sliders }}" as="sl" hint-placeholder-count="3">
+              <label style="display: block">
+                <span style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+                  <span style="font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">{{ sl.label }}</span>
+                  <span style="font-family: var(--fh); font-weight: 800; font-size: 20px; color: #dd0506">{{ sl.display }}</span>
+                </span>
+                <input type="range" min="{{ sl.min }}" max="{{ sl.max }}" step="{{ sl.step }}" value="{{ sl.value }}" onChange="{{ sl.onChange }}" style="display: block">
+              </label>
+            </sc-for>
+            <sc-if value="{{ isBetonMode }}" hint-placeholder-val="{{ true }}">
+              <label style="display: block">
+                <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Beton markasi</span>
+                <select value="{{ gradeIdx }}" onChange="{{ onGrade }}" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-size: 16px">
+                  <sc-for list="{{ gradeOptions }}" as="o" hint-placeholder-count="9"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                </select>
+              </label>
+            </sc-if>
+            <sc-if value="{{ isPlitaMode }}" hint-placeholder-val="{{ false }}">
+              <div>
+                <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Plita kengligi</span>
+                <div style="display: flex; border: 2px solid var(--line); width: fit-content">
+                  <sc-for list="{{ widthOpts }}" as="w" hint-placeholder-count="2">
+                    <button type="button" onClick="{{ w.onClick }}" style="min-height: 46px; padding: 0 20px; border: 0; border-right: 2px solid var(--line); background: {{ w.bg }}; color: {{ w.fg }}; font-family: var(--fh); font-weight: 700; font-size: 13px; cursor: pointer">{{ w.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 48px); background: var(--bg2)">
+            <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px; padding-bottom: 16px; border-bottom: 2px solid var(--line)">
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">{{ calcHeadLabel }}</span>
+              <span style="font-family: var(--fh); font-weight: 900; font-size: clamp(36px, 8vw, 72px); line-height: 1; color: #dd0506">{{ calcHead }}</span>
             </div>
-            <h2
-              style="margin: var(--space-3) 0 var(--space-4); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(30px, 4.6vw, 62px); line-height: .98; letter-spacing: 0; text-transform: uppercase">
-              B2B so’rov<br>yuborish</h2>
-            <p
-              style="max-width: 40ch; margin: 0 0 var(--space-8); font-size: 14px; line-height: 1.6; color: var(--sx-muted)">
-              Ulgurji hajmlar uchun alohida narx. Menejer 15 daqiqa ichida bog’lanadi.</p>
-            <div style="display: flex; flex-direction: column; gap: var(--space-4)">
-              <sc-for list="{{ contacts }}" as="ct" hint-placeholder-count="3">
-                <div style="padding-bottom: var(--space-4); border-bottom: 2px solid var(--sx-line)">
-                  <div
-                    style="font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">{{
-                    ct.k }}</div>
-                  <div
-                    style="margin-top: 4px; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 18px">
-                    {{ ct.v }}</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(50%, 150px), 1fr)); border-left: 2px solid var(--line)">
+              <sc-for list="{{ results }}" as="r" hint-placeholder-count="4">
+                <div style="padding: 14px; border-right: 2px solid var(--line); border-bottom: 2px solid var(--line)">
+                  <div style="font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mute)">{{ r.k }}</div>
+                  <div style="margin-top: 6px; font-family: var(--fh); font-weight: 700; font-size: 15px">{{ r.v }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top: 24px; padding: 20px; border: 2px solid #dd0506; background: var(--bg)">
+              <div style="font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Taxminiy smeta</div>
+              <div style="margin-top: 6px; font-family: var(--fh); font-weight: 900; font-size: clamp(26px, 5vw, 42px)">{{ estimate }}</div>
+              <div style="margin-top: 6px; font-size: 13px; line-height: 1.5; color: var(--mute)">{{ estimateNote }}</div>
+              <div data-noprint="1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 8px; margin-top: 18px">
+                <button type="button" onClick="{{ orderCalc }}" style="display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 18px; border: 0; background: #dd0506; color: #fff; font-family: var(--fh); font-weight: 700; font-size: 13px; cursor: pointer" style-hover="background:#b30405">Buyurtma berish <span>&rarr;</span></button>
+                <button type="button" onClick="{{ printCalc }}" style="display: flex; align-items: center; min-height: 52px; padding: 0 18px; border: 2px solid var(--line); background: transparent; color: var(--ink); font-family: var(--fh); font-weight: 700; font-size: 13px; cursor: pointer" style-hover="borderColor:#dd0506">PDF hisobotni olish</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isDelivery }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Yetkazish" style="animation: sxRise .45s ease both">
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(28px, 6vw, 64px) clamp(16px, 4vw, 48px)">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--mute)"><a href="#/">Bosh sahifa</a> / <span style="color: #dd0506">Yetkazish</span></div>
+          <h1 style="margin: 10px 0 24px; font-family: var(--fh); font-weight: 900; font-size: clamp(30px, 7vw, 72px); line-height: 1; text-transform: uppercase">Logistika va quvvat</h1>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(20px, 4vw, 48px); align-items: start">
+            <div style="position: relative; aspect-ratio: 1; width: 100%; max-width: 560px; border: 2px solid var(--line); background: var(--bg2); display: grid; place-items: center; overflow: hidden">
+              <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 40px 40px"></div>
+              <div style="position: absolute; width: 82%; aspect-ratio: 1; border: 2px solid #dd050655; border-radius: 50%"></div>
+              <div style="position: absolute; width: 56%; aspect-ratio: 1; border: 2px solid #dd050655; border-radius: 50%"></div>
+              <div style="position: absolute; width: 30%; aspect-ratio: 1; border: 2px solid #dd050677; border-radius: 50%"></div>
+              <div style="position: absolute; width: 82%; aspect-ratio: 1; border: 2px solid #dd0506; border-radius: 50%; animation: sxPulse 3.4s ease-out infinite"></div>
+              <div style="position: absolute; width: 82%; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(from 0deg, #dd050600 0deg, #dd050638 60deg, #dd050600 70deg); animation: sxSweep 6s linear infinite"></div>
+              <div style="position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; background: #dd0506"></div>
+              <div style="position: absolute; left: 50%; top: 50%; margin: -34px 0 0 -7px; font-family: var(--fh); font-weight: 800; font-size: 12px; letter-spacing: .08em; white-space: nowrap">STONMAX</div>
+              <sc-for list="{{ mapPoints }}" as="mp" hint-placeholder-count="5">
+                <div style="position: absolute; left: {{ mp.left }}; top: {{ mp.top }}; display: flex; flex-direction: {{ mp.dir }}; align-items: center; gap: 6px; transform: translate({{ mp.shift }}, -50%)">
+                  <span style="width: 8px; height: 8px; background: var(--ink); flex: none"></span>
+                  <span style="font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); white-space: nowrap">{{ mp.name }}</span>
+                </div>
+              </sc-for>
+              <div style="position: absolute; left: 12px; bottom: 10px; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mute)">Qo&rsquo;qondan radius &mdash; 50 km</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0; border-top: 2px solid var(--line)">
+              <sc-for list="{{ deliveryTerms }}" as="d" hint-placeholder-count="4">
+                <div style="display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 2px solid var(--line)">
+                  <span style="font-size: 14px; color: var(--mute)">{{ d.k }}</span>
+                  <span style="font-family: var(--fh); font-weight: 700; font-size: 14px; text-align: right">{{ d.v }}</span>
+                </div>
+              </sc-for>
+              <sc-for list="{{ logistics }}" as="l" hint-placeholder-count="4">
+                <div style="display: flex; gap: 14px; padding: 16px 0; border-bottom: 2px solid var(--line)">
+                  <div style="font-family: var(--fh); font-weight: 800; font-size: 12px; color: #dd0506; min-width: 28px">{{ l.no }}</div>
+                  <div>
+                    <div style="font-family: var(--fh); font-weight: 700; font-size: 15px">{{ l.title }}</div>
+                    <div style="margin-top: 4px; font-size: 14px; line-height: 1.6; color: var(--mute)">{{ l.body }}</div>
+                  </div>
                 </div>
               </sc-for>
             </div>
           </div>
-          <form onSubmit="{{ onSubmit }}"
-            style="padding: clamp(32px, 5vw, 80px) clamp(16px, 4vw, 48px); background: var(--sx-bg2); display: flex; flex-direction: column; gap: var(--space-4)">
-            <label style="display: block">
-              <span
-                style="display: block; margin-bottom: 8px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">Ism</span>
-              <input type="text" placeholder="Ismingiz"
-                style="width: 100%; padding: 14px; border: 2px solid var(--sx-line); background: var(--sx-bg); color: var(--sx-ink); font-size: 14px"
-                style-focus="borderColor:#dd0506">
-            </label>
-            <div
-              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4)">
-              <label style="display: block">
-                <span
-                  style="display: block; margin-bottom: 8px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">Telefon</span>
-                <input type="tel" placeholder="+998 __ ___ __ __"
-                  style="width: 100%; padding: 14px; border: 2px solid var(--sx-line); background: var(--sx-bg); color: var(--sx-ink); font-size: 14px"
-                  style-focus="borderColor:#dd0506">
-              </label>
-              <label style="display: block">
-                <span
-                  style="display: block; margin-bottom: 8px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">Telegram</span>
-                <input type="text" placeholder="@username"
-                  style="width: 100%; padding: 14px; border: 2px solid var(--sx-line); background: var(--sx-bg); color: var(--sx-ink); font-size: 14px"
-                  style-focus="borderColor:#dd0506">
-              </label>
-            </div>
-            <label style="display: block">
-              <span
-                style="display: block; margin-bottom: 8px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">Mahsulot
-                turi</span>
-              <select
-                style="width: 100%; padding: 14px; border: 2px solid var(--sx-line); background: var(--sx-bg); color: var(--sx-ink); font-size: 14px">
-                <option>2PK temir-beton plitalar</option>
-                <option>Tayyor suyuq beton (M100–M700)</option>
-                <option>Quruq qorishmalar</option>
-                <option>Qum va tosh mahsulotlari</option>
-                <option>Albaster</option>
-              </select>
-            </label>
-            <label style="display: block">
-              <span
-                style="display: block; margin-bottom: 8px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">Yetkazish
-                manzili</span>
-              <input type="text" placeholder="Viloyat, tuman, obyekt (mas. Farg‘ona vil.)"
-                style="width: 100%; padding: 14px; border: 2px solid var(--sx-line); background: var(--sx-bg); color: var(--sx-ink); font-size: 14px"
-                style-focus="borderColor:#dd0506">
-            </label>
-            <label style="display: block">
-              <span
-                style="display: block; margin-bottom: 8px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">Izoh</span>
-              <textarea rows="3" placeholder="Hajm, muddat, obyekt turi"
-                style="width: 100%; padding: 14px; border: 2px solid var(--sx-line); background: var(--sx-bg); color: var(--sx-ink); font-size: 14px; resize: vertical"
-                style-focus="borderColor:#dd0506"></textarea>
-            </label>
-            <button type="submit"
-              style="align-self: start; display: inline-flex; align-items: center; padding: 17px 24px; border: 0; background: #dd0506; color: var(--sx-onaccent); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 14px; cursor: pointer"
-              style-hover="background:var(--sx-ink);color:var(--sx-bg)">{{ submitLabel }}</button>
-          </form>
         </div>
       </section>
+    </main>
+  </sc-if>
 
-      <sc-if value="{{ detail }}" hint-placeholder-val="{{ false }}">
-        <div onClick="{{ closeDetail }}"
-          style="position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-start; justify-content: center; padding: clamp(12px, 4vw, 48px); background: rgba(0,0,0,.72); backdrop-filter: blur(6px); overflow-y: auto; animation: sxFade .2s ease both">
-          <div onClick="{{ stop }}"
-            style="position: relative; width: 100%; max-width: 940px; border: 2px solid var(--sx-line); background: var(--sx-bg2); animation: sxPop .28s cubic-bezier(.2,.8,.3,1) both">
-            <div
-              style="display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); padding: clamp(20px, 3vw, 36px); border-bottom: 2px solid var(--sx-line)">
-              <div>
-                <div
-                  style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #dd0506">
-                  {{ detail.kicker }} &middot; {{ detail.code }}</div>
-                <h3
-                  style="margin: var(--space-3) 0 0; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(22px, 3vw, 34px); line-height: 1.1">
-                  {{ detail.title }}</h3>
-              </div>
-              <button type="button" onClick="{{ closeDetail }}" aria-label="Yopish"
-                style="flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 2px solid var(--sx-line); background: transparent; color: var(--sx-ink); cursor: pointer"
-                style-hover="borderColor:#dd0506">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" aria-hidden="true">
-                  <path d="M18 6 6 18M6 6l12 12"></path>
-                </svg>
-              </button>
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Aloqa" style="animation: sxRise .45s ease both">
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); max-width: 1440px; margin: 0 auto">
+          <div style="padding: clamp(28px, 6vw, 64px) clamp(16px, 4vw, 48px); border-right: 2px solid var(--line)">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--mute)"><a href="#/">Bosh sahifa</a> / <span style="color: #dd0506">Aloqa</span></div>
+            <h1 style="margin: 10px 0 12px; font-family: var(--fh); font-weight: 900; font-size: clamp(30px, 7vw, 64px); line-height: 1; text-transform: uppercase">B2B so&rsquo;rov</h1>
+            <p style="max-width: 40ch; margin: 0 0 24px; font-size: 15px; line-height: 1.6; color: var(--mute)">Ulgurji hajmlar uchun alohida narx. Menejer 15 daqiqa ichida bog&rsquo;lanadi.</p>
+            <div style="border-top: 2px solid var(--line)">
+              <sc-for list="{{ contacts }}" as="ct" hint-placeholder-count="4">
+                <a href="{{ ct.href }}" style="display: block; padding: 14px 0; border-bottom: 2px solid var(--line)">
+                  <div style="font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">{{ ct.k }}</div>
+                  <div style="margin-top: 4px; font-family: var(--fh); font-weight: 700; font-size: 17px">{{ ct.v }}</div>
+                </a>
+              </sc-for>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
-              <div style="padding: clamp(20px, 3vw, 36px); border-right: 2px solid var(--sx-line)">
-                <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--sx-ink)">{{ detail.long }}</p>
-                <div
-                  style="margin-top: var(--space-6); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">
-                  Qo&rsquo;llanish sohalari</div>
-                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3)">
-                  <sc-for list="{{ detail.uses }}" as="u" hint-placeholder-count="4">
-                    <span
-                      style="padding: 7px 12px; border: 2px solid var(--sx-line); font-size: 12px; color: var(--sx-muted)">{{
-                      u }}</span>
-                  </sc-for>
-                </div>
-                <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8)">
-                  <a href="#aloqa" onClick="{{ closeDetail }}"
-                    style="display: inline-flex; align-items: center; padding: 15px 20px; background: #dd0506; color: var(--sx-onaccent); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px"
-                    style-hover="background:var(--sx-ink);color:var(--sx-bg)">So&rsquo;rov yuborish</a>
-                  <a href="#kalkulyator" onClick="{{ closeDetail }}"
-                    style="display: inline-flex; align-items: center; padding: 15px 20px; border: 2px solid var(--sx-line); color: var(--sx-ink); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px"
-                    style-hover="borderColor:#dd0506">Hajmni hisoblash</a>
-                </div>
+          </div>
+          <div style="padding: clamp(28px, 6vw, 64px) clamp(16px, 4vw, 48px); background: var(--bg2)">
+            <sc-if value="{{ sentLead }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 14px; padding: 24px; border: 2px solid #dd0506; background: var(--bg)">
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #dd0506">So&rsquo;rov qabul qilindi</div>
+                <div style="font-family: var(--fh); font-weight: 900; font-size: clamp(28px, 6vw, 44px)">{{ sentId }}</div>
+                <div style="font-size: 15px; line-height: 1.6; color: var(--mute)">Rahmat, {{ sentName }}! Menejer {{ sentPhone }} raqamiga 15 daqiqa ichida qo&rsquo;ng&rsquo;iroq qiladi.</div>
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--mute)">amoCRM: {{ sentAmo }}</div>
+                <button type="button" onClick="{{ newLead }}" style="align-self: start; min-height: 48px; padding: 0 18px; border: 2px solid var(--line); background: transparent; color: var(--ink); font-family: var(--fh); font-weight: 700; font-size: 13px; cursor: pointer">Yangi so&rsquo;rov</button>
               </div>
-              <div style="background: var(--sx-surface)">
-                <div
-                  style="padding: clamp(16px, 2vw, 24px) clamp(20px, 3vw, 36px); border-bottom: 2px solid var(--sx-line); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">
-                  Texnik parametrlar</div>
-                <sc-for list="{{ detail.rows }}" as="r" hint-placeholder-count="6">
-                  <div
-                    style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); padding: 14px clamp(20px, 3vw, 36px); border-bottom: 2px solid var(--sx-line)">
-                    <span
-                      style="font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--sx-muted)">{{
-                      r.k }}</span>
-                    <span
-                      style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 14px; text-align: right">{{
-                      r.v }}</span>
-                  </div>
+            </sc-if>
+            <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+              <form onSubmit="{{ onSubmit }}" novalidate style="display: flex; flex-direction: column; gap: 14px">
+                <label style="display: block">
+                  <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Ism yoki kompaniya *</span>
+                  <input type="text" value="{{ f.name }}" onInput="{{ on.name }}" placeholder="Ismingiz" autocomplete="name" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid {{ err.nameLine }}; background: var(--bg); color: var(--ink); font-size: 16px" style-focus="borderColor:#dd0506;outline:none">
+                  <span style="display: block; margin-top: 6px; font-size: 12px; color: #dd0506">{{ err.name }}</span>
+                </label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 14px">
+                  <label style="display: block">
+                    <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Telefon *</span>
+                    <input type="tel" value="{{ f.phone }}" onInput="{{ on.phone }}" placeholder="+998 __ ___ __ __" autocomplete="tel" inputmode="tel" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid {{ err.phoneLine }}; background: var(--bg); color: var(--ink); font-size: 16px" style-focus="borderColor:#dd0506;outline:none">
+                    <span style="display: block; margin-top: 6px; font-size: 12px; color: #dd0506">{{ err.phone }}</span>
+                  </label>
+                  <label style="display: block">
+                    <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Telegram</span>
+                    <input type="text" value="{{ f.telegram }}" onInput="{{ on.telegram }}" placeholder="@username" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-size: 16px" style-focus="borderColor:#dd0506;outline:none">
+                  </label>
+                </div>
+                <label style="display: block">
+                  <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Mahsulot turi</span>
+                  <select value="{{ f.product }}" onChange="{{ on.product }}" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-size: 16px">
+                    <sc-for list="{{ productOptions }}" as="o" hint-placeholder-count="11"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  </select>
+                </label>
+                <label style="display: block">
+                  <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Hajm / miqdor</span>
+                  <input type="text" value="{{ f.qty }}" onInput="{{ on.qty }}" placeholder="Masalan: 24 dona 6.0×1.2 yoki 40 m³ M300" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-size: 16px" style-focus="borderColor:#dd0506;outline:none">
+                </label>
+                <label style="display: block">
+                  <span style="display: block; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute)">Yetkazish manzili</span>
+                  <input type="text" value="{{ f.address }}" onInput="{{ on.address }}" placeholder="Tuman, mahalla, obyekt" style="width: 100%; min-height: 48px; padding: 12px 14px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-size: 16px" style-focus="borderColor:#dd0506;outline:none">
+                </label>
+                <label style="display: flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer">
+                  <input type="checkbox" checked="{{ f.tgPref }}" onChange="{{ on.tgPref }}" style="width: 22px; height: 22px; accent-color: #dd0506">
+                  <span style="font-size: 14px">Telegram orqali bog&rsquo;laning</span>
+                </label>
+                <button type="submit" style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 22px; border: 0; background: #dd0506; color: #fff; font-family: var(--fh); font-weight: 700; font-size: 15px; cursor: pointer" style-hover="background:#b30405">So&rsquo;rov yuborish <span>&rarr;</span></button>
+                <span style="font-size: 12px; color: var(--mute)">So&rsquo;rov to&rsquo;g&rsquo;ridan-to&rsquo;g&rsquo;ri savdo bo&rsquo;limining amoCRM voronkasiga tushadi.</span>
+              </form>
+            </sc-if>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isBlog }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Blog" style="animation: sxRise .45s ease both">
+      <section style="border-bottom: 2px solid var(--line); background: var(--bg2)">
+        <div style="max-width: 1440px; margin: 0 auto; padding: clamp(28px, 6vw, 64px) clamp(16px, 4vw, 48px) 20px">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--mute)"><a href="#/">Bosh sahifa</a> / <span style="color: #dd0506">Blog</span></div>
+          <h1 style="margin: 10px 0 8px; font-family: var(--fh); font-weight: 900; font-size: clamp(32px, 8vw, 80px); line-height: 1; text-transform: uppercase">Blog</h1>
+          <p style="max-width: 50ch; margin: 0 0 18px; font-size: 15px; line-height: 1.6; color: var(--mute)">Beton, plitalar va qurilish texnologiyasi bo&rsquo;yicha zavod laboratoriyasi va muhandislarimiz maslahatlari.</p>
+          <div style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none">
+            <sc-for list="{{ blogTags }}" as="t" hint-placeholder-count="4">
+              <button type="button" onClick="{{ t.onClick }}" style="flex: none; min-height: 44px; padding: 0 14px; border: 2px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.fg }}; font-size: 12px; font-weight: 700; white-space: nowrap; cursor: pointer">{{ t.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      <section style="border-bottom: 2px solid var(--line)">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px; max-width: 1440px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 48px) clamp(40px, 7vw, 80px)">
+          <sc-for list="{{ blogList }}" as="b" hint-placeholder-count="4">
+            <a href="{{ b.href }}" style="display: flex; flex-direction: column; border: 2px solid var(--line); background: var(--bg2); color: var(--ink)" style-hover="borderColor:#dd0506;color:var(--ink)">
+              <div style="position: relative; aspect-ratio: 16 / 9; border-bottom: 2px solid var(--line); background: var(--surf)">
+                <image-slot id="{{ b.slotId }}" shape="rect" placeholder="Maqola rasmi"></image-slot>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px; flex: 1; padding: 18px">
+                <span style="display: flex; justify-content: space-between; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mute)"><span style="color: #dd0506">{{ b.tag }}</span><span>{{ b.meta }}</span></span>
+                <span style="font-family: var(--fh); font-weight: 800; font-size: 18px; line-height: 1.3">{{ b.title }}</span>
+                <span style="font-size: 14px; line-height: 1.55; color: var(--mute)">{{ b.excerpt }}</span>
+                <span style="margin-top: auto; padding-top: 8px; font-size: 12px; font-weight: 700; color: #dd0506">O&rsquo;qish &rarr;</span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isPost }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Maqola" style="animation: sxRise .45s ease both">
+      <article style="border-bottom: 2px solid var(--line)">
+        <div style="max-width: 760px; margin: 0 auto; padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 32px)">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mute)"><a href="#/blog">Blog</a> / <span style="color: #dd0506">{{ post.tag }}</span></div>
+          <h1 style="margin: 12px 0 10px; font-family: var(--fh); font-weight: 900; font-size: clamp(26px, 6vw, 48px); line-height: 1.1; text-wrap: balance">{{ post.title }}</h1>
+          <div style="font-size: 13px; color: var(--mute)">{{ post.meta }}</div>
+          <p style="margin: 20px 0; font-size: 18px; line-height: 1.6; text-wrap: pretty">{{ post.excerpt }}</p>
+          <div style="position: relative; aspect-ratio: 16 / 9; margin-bottom: 24px; border: 2px solid var(--line); background: var(--surf)">
+            <image-slot id="{{ post.slotId }}" shape="rect" placeholder="Maqola rasmi"></image-slot>
+          </div>
+          <sc-for list="{{ post.blocks }}" as="bl" hint-placeholder-count="6">
+            <sc-if value="{{ bl.isH }}" hint-placeholder-val="{{ false }}"><h2 style="margin: 28px 0 10px; font-family: var(--fh); font-weight: 800; font-size: clamp(18px, 4vw, 24px); text-transform: uppercase">{{ bl.t }}</h2></sc-if>
+            <sc-if value="{{ bl.isP }}" hint-placeholder-val="{{ true }}"><p style="margin: 0 0 14px; font-size: 16px; line-height: 1.75; text-wrap: pretty">{{ bl.t }}</p></sc-if>
+          </sc-for>
+          <sc-if value="{{ post.hasProducts }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top: 32px; padding-top: 20px; border-top: 2px solid var(--line)">
+              <div style="margin-bottom: 12px; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mute)">Maqoladagi mahsulotlar</div>
+              <div style="display: grid; gap: 8px">
+                <sc-for list="{{ post.prods }}" as="p" hint-placeholder-count="2">
+                  <a href="{{ p.href }}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; padding: 12px 16px; border: 2px solid var(--line); background: var(--bg2)" style-hover="borderColor:#dd0506">
+                    <span><b style="font-family: var(--fh); color: #dd0506">{{ p.code }}</b> {{ p.name }}</span>
+                    <span style="flex: none; font-size: 12px; font-weight: 700; color: var(--mute)">{{ p.fromLabel }}</span>
+                  </a>
                 </sc-for>
-                <div style="padding: clamp(20px, 3vw, 36px)">
-                  <div
-                    style="font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--sx-muted)">
-                    Narx</div>
-                  <div
-                    style="margin-top: 4px; font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 22px; color: #dd0506">
-                    {{ detail.price }}</div>
-                </div>
               </div>
             </div>
-          </div>
+          </sc-if>
         </div>
-      </sc-if>
+      </article>
+    </main>
+  </sc-if>
 
-      <footer style="background: #dd0506; color: var(--sx-onaccent)">
-        <div style="max-width: 1480px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) clamp(16px, 4vw, 48px)">
-          <div
-            style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: clamp(38px, 8vw, 116px); line-height: .9; letter-spacing: 0; text-transform: uppercase">
-            Beton bilan<br>ishlaymiz.</div>
-          <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-6); margin-top: clamp(24px, 5vw, 56px); padding-top: var(--space-6); border-top: 2px solid rgba(255,255,255,.45)">
-            <div
-              style="font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 13px; letter-spacing: .14em; text-transform: uppercase">
-              Stonmax zavodi</div>
-            <div style="font-size: 13px; line-height: 1.7">Qo'qon sanoat zonasi<br>Ish vaqti: 24/7</div>
-            <div style="font-size: 13px; line-height: 1.7">+998 95 402 00 05<br><br></div>
-            <div style="font-size: 13px; line-height: 1.7">Telegram: @stonmax_uz<br></div>
-          </div>
-          <div
-            style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-6); padding-top: var(--space-6); border-top: 2px solid rgba(255,255,255,.45)">
-            <span
-              style="margin-right: var(--space-4); font-family: 'Orbitron', var(--font-heading); font-weight: 800; font-size: 11px; letter-spacing: .18em; text-transform: uppercase">Ijtimoiy
-              tarmoqlar</span>
-            <a href="https://instagram.com/stonmax.uz" target="_blank" rel="noopener" aria-label="Instagram"
-              style="display: grid; place-items: center; width: 46px; height: 46px; border: 2px solid rgba(255,255,255,.5); color: #ffffff"
-              style-hover="background:#ffffff;color:#dd0506">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5"></rect>
-                <circle cx="12" cy="12" r="4"></circle>
-                <path d="M17.5 6.5h.01"></path>
-              </svg>
+  <footer style="background: var(--bg2); border-top: 2px solid var(--line)">
+    <div style="max-width: 1440px; margin: 0 auto; padding: clamp(32px, 6vw, 72px) clamp(16px, 4vw, 48px) 24px">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 28px">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <div style="font-family: var(--fh); font-weight: 900; font-size: 22px">STONMAX</div>
+          <div style="font-size: 13px; line-height: 1.6; color: var(--mute)">Temir-beton buyumlar va tayyor beton zavodi. {{ address }}.</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mute)">Sahifalar</div>
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5"><a href="{{ n.href }}" style="font-size: 14px; min-height: 28px">{{ n.label }}</a></sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mute)">Aloqa</div>
+          <a href="{{ phoneHref }}" style="font-family: var(--fh); font-weight: 700; font-size: 16px">{{ phone }}</a>
+          <a href="{{ tgHref }}" style="font-size: 14px">Telegram {{ tg }}</a>
+          <span style="font-size: 14px; color: var(--mute)">Ish vaqti: {{ hours }}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mute)">Ijtimoiy tarmoqlar</div>
+          <div style="display: flex; gap: 8px">
+            <a href="https://instagram.com/stonmax.uz" target="_blank" rel="noopener" aria-label="Instagram" style="display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid var(--line)" style-hover="borderColor:#dd0506;color:#dd0506">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path></svg>
             </a>
-            <a href="https://facebook.com/stonmaxuz" target="_blank" rel="noopener" aria-label="Facebook"
-              style="display: grid; place-items: center; width: 46px; height: 46px; border: 2px solid rgba(255,255,255,.5); color: #ffffff"
-              style-hover="background:#ffffff;color:#dd0506">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
+            <a href="https://facebook.com/stonmaxuz" target="_blank" rel="noopener" aria-label="Facebook" style="display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid var(--line)" style-hover="borderColor:#dd0506;color:#dd0506">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
             </a>
-            <a href="https://t.me/stonmax" target="_blank" rel="noopener" aria-label="Telegram"
-              style="display: grid; place-items: center; width: 46px; height: 46px; border: 2px solid rgba(255,255,255,.5); color: #ffffff"
-              style-hover="background:#ffffff;color:#dd0506">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path
-                  d="M21.5 3.5 2.8 10.7c-.8.3-.8 1.4 0 1.7l4.6 1.6 1.8 5.3c.2.7 1.1.9 1.6.3l2.5-2.7 4.6 3.4c.6.4 1.4.1 1.6-.6l3-14.6c.2-.8-.6-1.5-1.5-1.1z">
-                </path>
-                <path d="M7.4 14 18 6.8"></path>
-              </svg>
+            <a href="https://t.me/stonmax" target="_blank" rel="noopener" aria-label="Telegram" style="display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid var(--line)" style-hover="borderColor:#dd0506;color:#dd0506">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
             </a>
-            <a href="https://youtube.com/@stonmax" target="_blank" rel="noopener" aria-label="YouTube"
-              style="display: grid; place-items: center; width: 46px; height: 46px; border: 2px solid rgba(255,255,255,.5); color: #ffffff"
-              style-hover="background:#ffffff;color:#dd0506">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="5" width="20" height="14" rx="4"></rect>
-                <path d="m10 9 5 3-5 3z"></path>
-              </svg>
+            <a href="https://youtube.com/@stonmax" target="_blank" rel="noopener" aria-label="YouTube" style="display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid var(--line)" style-hover="borderColor:#dd0506;color:#dd0506">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg>
             </a>
           </div>
         </div>
-      </footer>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 32px; padding-top: 18px; border-top: 2px solid var(--line); font-size: 12px; color: var(--mute)">
+        <span>&copy; 2026 Stonmax. GOST 9561-2016 &middot; GOST 7473-2010</span>
+      </div>
     </div>
+  </footer>
 
-  </x-dc>
-  <script type="text/x-dc" data-dc-script
-    data-props="{&quot;pricePerM3&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:620000,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:300000,&quot;max&quot;:1500000,&quot;step&quot;:10000,&quot;unit&quot;:&quot;so'm&quot;,&quot;section&quot;:&quot;Kalkulyator&quot;},&quot;deliveryRadiusKm&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:50,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:20,&quot;max&quot;:200,&quot;step&quot;:5,&quot;unit&quot;:&quot;km&quot;,&quot;section&quot;:&quot;Logistika&quot;}}">
-const PRODUCTS = [
-  { cat: 'temir-beton', kicker: '2PK Plita', code: 'PK-01', title: '2PK temir-beton plitalar', body: 'Bo\u2018shliqli qavat va tom yopmasi plitalari. A500C armatura setkasi, bug\u2018 kamerasida qotirish, kesim bo\u2018yicha o\u2018lchamga moslash.', price: 'so\u2018rov bo\u2018yicha', specs: [{ k: 'Uzunlik', v: '2400\u20136300 mm' }, { k: 'Yuklama', v: '800 kg/m\u00b2' }, { k: 'Qalinlik', v: '220 mm' }, { k: 'GOST', v: '9561-2016' }] },
-  { cat: 'temir-beton', kicker: 'Buyurtma', code: 'PK-02', title: 'Nostandart kesim plitalar', body: 'Loyiha chizmasi bo\u2018yicha uzunlik va tayanch bo\u2018yinlari. Montaj ilmoqlari va qirralar zavodda tayyorlanadi.', price: 'loyiha bo\u2018yicha', specs: [{ k: 'Tolerans', v: '\u00b1 5 mm' }, { k: 'Beton', v: 'B22,5' }, { k: 'Muddat', v: '3\u20137 kun' }, { k: 'Sinov', v: 'Har partiya' }] },
-  { cat: 'suyuq-beton', kicker: 'Tayyor beton', code: 'BSU-M', title: 'Tayyor suyuq beton M100\u2013M450', body: 'Mikserlarda uzluksiz yetkazish. Yuqori oquvchanlik, sovuqbardosh qo\u2018shimchalar, poydevor va monolit ishlar uchun.', price: 'M300 \u2014 bazis narx', specs: [{ k: 'Markalar', v: 'M100\u2013M450' }, { k: 'Oquvchanlik', v: 'P3\u2013P5' }, { k: 'Sovuq', v: 'F150\u2013F300' }, { k: 'Yetkazish', v: '24/7' }] },
-  { cat: 'suyuq-beton', kicker: 'Nasos', code: 'BSU-P', title: 'Beton nasosi bilan quyish', body: 'Balandlikka va uzoq masofaga quyish. Mobil nasoslar 42 m gacha strela bilan, smena bo\u2018yicha ijara.', price: 'smena / m\u00b3', specs: [{ k: 'Strela', v: '28\u201342 m' }, { k: 'Unum', v: '60 m\u00b3/soat' }, { k: 'Min. hajm', v: '20 m\u00b3' }, { k: 'Operator', v: 'Kiritilgan' }] },
-  { cat: 'quruq', kicker: 'Qorishma', code: 'QQ-01', title: 'Quruq qorishmalar va yelimlar', body: 'Plitka yelimi, gipsli va sementli shpaklyovka, g\u2018isht terish qorishmasi. 25 kg qoplarda, palletlab.', price: 'qop / pallet', specs: [{ k: 'Qop', v: '25 kg' }, { k: 'Yopishish', v: '0,8 MPa' }, { k: 'Sarf', v: '4\u20136 kg/m\u00b2' }, { k: 'Saqlash', v: '12 oy' }] },
-  { cat: 'quruq', kicker: 'Gips', code: 'AL-01', title: 'Albaster (qurilish gipsi)', body: 'Mayda frakisyali, tez qotuvchi gips. Ichki suvoq, qoliplash va dekor elementlari uchun.', price: 'qop 25 kg', specs: [{ k: 'Qotish', v: '6\u201310 daq' }, { k: 'Fraksiya', v: '0,2 mm' }, { k: 'Marka', v: 'G-5' }, { k: 'Oqlik', v: '85%' }] },
-  { cat: 'inert', kicker: 'Shag\u2018al', code: 'IN-01', title: 'Maydalangan tosh va 5\u201316 mm fraksiya', body: 'Yuvilgan, chang darajasi past shag\u2018al. Beton aralashmalari, yo\u2018l asosi va drenaj uchun.', price: 'tonna / m\u00b3', specs: [{ k: 'Fraksiya', v: '5\u201316 / 20\u201340' }, { k: 'Zichlik', v: '1400 kg/m\u00b3' }, { k: 'Chang', v: '< 1%' }, { k: 'Yemirilish', v: 'M1200' }] },
-  { cat: 'inert', kicker: 'Qum', code: 'IN-02', title: 'Yuvilgan va quruq qum', body: 'Yuvilgan qum beton va suvoq uchun, quruq elangan qum quruq qorishmalar va tekislash uchun.', price: 'tonna / m\u00b3', specs: [{ k: 'Modul', v: '1,8\u20132,5' }, { k: 'Loyqa', v: '< 2%' }, { k: 'Namlik', v: '< 5%' }, { k: 'Yetkazish', v: 'Samosval' }] }
+  <sc-if value="{{ showProdBar }}" hint-placeholder-val="{{ false }}">
+    <div data-noprint="1" style="position: fixed; left: 0; right: 0; bottom: calc(62px + env(safe-area-inset-bottom)); z-index: 41; display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 16px; border-top: 2px solid var(--line); background: var(--bg2)">
+      <div style="flex: 1; min-width: 0">
+        <div style="font-size: 11px; color: var(--mute); overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ prodBarLabel }}</div>
+        <div style="font-family: var(--fh); font-weight: 900; font-size: 17px">{{ prodBarPrice }}</div>
+      </div>
+      <button type="button" onClick="{{ orderProduct }}" style="flex: none; min-height: 48px; padding: 0 18px; border: 0; background: #dd0506; color: #fff; font-family: var(--fh); font-weight: 700; font-size: 13px; cursor: pointer">Buyurtma &rarr;</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ isMob }}" hint-placeholder-val="{{ false }}">
+    <nav data-noprint="1" style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 42; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 2px solid var(--line); background: var(--bg); padding-bottom: env(safe-area-inset-bottom)">
+      <a href="#/" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 60px; color: {{ tabC.home }}; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-top: 3px solid {{ tabL.home }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V21H3z"></path><path d="M9 21v-7h6v7"></path></svg>Bosh</a>
+      <a href="#/katalog" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 60px; color: {{ tabC.katalog }}; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-top: 3px solid {{ tabL.katalog }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>Katalog</a>
+      <a href="#/kalkulyator" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 60px; color: {{ tabC.kalkulyator }}; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-top: 3px solid {{ tabL.kalkulyator }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20"></rect><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"></path></svg>Hisob</a>
+      <a href="#/blog" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 60px; color: {{ tabC.blog }}; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-top: 3px solid {{ tabL.blog }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="M8 8h8M8 12h8M8 16h5"></path></svg>Blog</a>
+      <a href="{{ phoneHref }}" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 60px; background: #dd0506; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-top: 3px solid #dd0506"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Qo&rsquo;ng&rsquo;iroq</a>
+    </nav>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TICKER = ['2PK plitalar', 'PB 7,4–8,9 m', 'M100–M500 beton', 'Quduq halqalari', 'Lotoklar', 'Stolba 9,5 / 10,5 m', 'Shlakoblok', '5–16 mm shag‘al', 'Mitiy pesok', 'Albaster'];
+const NAV = [['Bosh sahifa', '#/', 'home'], ['Katalog', '#/katalog', 'katalog'], ['Kalkulyator', '#/kalkulyator', 'kalkulyator'], ['Yetkazish', '#/yetkazish', 'yetkazish'], ['Blog', '#/blog', 'blog'], ['Aloqa', '#/aloqa', 'aloqa']];
+const POINTS = [
+  { name: 'Uchko‘prik · 12 km', left: '62%', top: '35%' },
+  { name: 'Bag‘dod · 37 km', left: '79%', top: '56%' },
+  { name: 'Rishton · 34 km', left: '74%', top: '66%' },
+  { name: 'Yaypan · 21 km', left: '38%', top: '63%' },
+  { name: 'Beshariq · 28 km', left: '36%', top: '55%' }
 ];
+const FEATURED = ['2pk', 'beton', 'kolodets', 'lotok'];
+const emptyForm = () => ({ name: '', phone: '', telegram: '', product: '2pk', qty: '', address: '', tgPref: true, estimate: 0 });
 
-const CATS = [
-  { id: 'all', label: 'Barchasi' },
-  { id: 'temir-beton', label: 'Temir-beton' },
-  { id: 'suyuq-beton', label: 'Suyuq beton' },
-  { id: 'inert', label: 'Inert materiallar' },
-  { id: 'quruq', label: 'Quruq qorishmalar' }
-];
-
-const TICKER = ['2PK plitalar', 'M100\u2013M450 beton', 'Maydalangan tosh', '5\u201316 mm fraksiya', 'Mitiy pesok', 'Suxoy pesok', 'Albaster', 'Plitka yelimi', 'GOST nazorati'];
-
-const GRADES = [
-  { mark: 'M150 / B12,5', strength: '12,5 MPa', frost: 'F100', use: 'Tayyorgarlik qatlami, yo\u2018lka' },
-  { mark: 'M200 / B15', strength: '15 MPa', frost: 'F150', use: 'Pol, maydoncha, devor asosi' },
-  { mark: 'M300 / B22,5', strength: '22,5 MPa', frost: 'F200', use: 'Poydevor, monolit plita' },
-  { mark: 'M350 / B25', strength: '25 MPa', frost: 'F250', use: 'Ustun, to\u2018sin, karkas' },
-  { mark: 'M450 / B35', strength: '35 MPa', frost: 'F300', use: 'Yuklama yuqori inshootlar' }
-];
-
-const DETAILS = {
-  'PK-01': {
-    long: 'Bo\u2018shliqli 2PK plitalar sanoat konveyerida, bug\u2018 kamerasida qotiriladi. Ichki armatura karkasi A500C po\u2018latdan, oldindan tarang holatda o\u2018rnatiladi \u2014 bu plitaning egilishga qarshiligini oshiradi va vazni yengil qoladi. Har bir partiya yuklama sinovidan o\u2018tkaziladi.',
-    uses: ['Turar-joy binolari', 'Qavat oralig\u2018i', 'Tom yopmasi', 'Sanoat obyektlari', 'Garaj va ombor'],
-    rows: [{ k: 'Uzunlik', v: '2400\u20136300 mm' }, { k: 'Kenglik', v: '1200 / 1500 mm' }, { k: 'Qalinlik', v: '220 mm' }, { k: 'Hisobiy yuklama', v: '800 kg/m\u00b2' }, { k: 'Armatura', v: 'A500C, tarang' }, { k: 'Beton sinfi', v: 'B22,5 (M300)' }, { k: 'Vazn', v: '1,9\u20133,1 t' }, { k: 'Standart', v: 'GOST 9561-2016' }]
-  },
-  'PK-02': {
-    long: 'Loyiha chizmasi asosida kesilgan nostandart plitalar: qisqartirilgan uzunlik, o\u2018yiq va tayanch bo\u2018yinlari zavodda tayyorlanadi. Montaj ilmoqlari va qirra himoyasi buyurtmaga qo\u2018shiladi, o\u2018lcham bo\u2018yicha toleranslar nazorat qilinadi.',
-    uses: ['Rekonstruksiya', 'Nostandart oraliq', 'Zinapoya maydonchasi', 'Balkon plitasi'],
-    rows: [{ k: 'Kesim toleransi', v: '\u00b1 5 mm' }, { k: 'Beton sinfi', v: 'B22,5' }, { k: 'Tayyorlash muddati', v: '3\u20137 kun' }, { k: 'Min. buyurtma', v: '10 dona' }, { k: 'Sinov', v: 'Har partiyada' }, { k: 'Montaj ilmog\u2018i', v: 'Kiritilgan' }]
-  },
-  'BSU-M': {
-    long: 'Avtomatlashtirilgan beton tugunida dozalangan tayyor aralashma. Mikserlarda uzluksiz yetkaziladi, yo\u2018lda aralashtirish davom etadi. Sovuqbardosh va plastifikator qo\u2018shimchalari bilan qishki rejimda ham quyish mumkin.',
-    uses: ['Poydevor', 'Monolit plita', 'Ustun va to\u2018sin', 'Pol va maydoncha', 'Yo\u2018l qoplamasi'],
-    rows: [{ k: 'Markalar', v: 'M100\u2013M450' }, { k: 'Beton sinfi', v: 'B7,5\u2013B35' }, { k: 'Oquvchanlik', v: 'P3\u2013P5' }, { k: 'Sovuqbardoshlik', v: 'F150\u2013F300' }, { k: 'Suv o\u2018tkazmaslik', v: 'W4\u2013W8' }, { k: 'Fraksiya', v: '5\u201320 mm' }, { k: 'Mikser hajmi', v: '7 / 9 m\u00b3' }, { k: 'Yetkazish', v: '24/7, 50 km' }]
-  },
-  'BSU-P': {
-    long: 'Mobil beton nasoslari balandlikka va qiyin kirish joylariga quyishni ta\u2019minlaydi. Strela uzunligi obyektga qarab tanlanadi, operator va yuvish xizmati narxga kiritilgan.',
-    uses: ['Ko\u2018p qavatli quyish', 'Tor hudud', 'Katta hajmli plita', 'Tom quyish'],
-    rows: [{ k: 'Strela', v: '28\u201342 m' }, { k: 'Unumdorlik', v: '60 m\u00b3/soat' }, { k: 'Min. hajm', v: '20 m\u00b3' }, { k: 'Operator', v: 'Kiritilgan' }, { k: 'Buyurtma', v: '1 kun oldin' }, { k: 'Ish rejimi', v: 'Smena / soatbay' }]
-  },
-  'QQ-01': {
-    long: 'Zavod liniyasida elangan qum va sement asosidagi quruq qorishmalar. Plitka yelimi, gipsli va sementli shpaklyovka, g\u2018isht terish qorishmasi \u2014 barchasi 25 kg qoplarda, palletlab yetkaziladi.',
-    uses: ['Plitka yopishtirish', 'Ichki suvoq', 'G\u2018isht terish', 'Tekislash qatlami'],
-    rows: [{ k: 'Qop', v: '25 kg' }, { k: 'Pallet', v: '48 qop / 1,2 t' }, { k: 'Yopishish', v: '0,8 MPa' }, { k: 'Sarf', v: '4\u20136 kg/m\u00b2' }, { k: 'Ishlash vaqti', v: '2\u20133 soat' }, { k: 'Saqlash', v: '12 oy' }]
-  },
-  'AL-01': {
-    long: 'Mayda fraksiyali qurilish gipsi \u2014 tez qotadi, silliq yuza beradi. Ichki suvoq, dekor qoliplash va tez ta\u2019mir ishlari uchun. Namlikdan himoyalangan qoplarda saqlanadi.',
-    uses: ['Ichki suvoq', 'Dekor qoliplash', 'Tez ta\u2019mir', 'Gipskarton biriktirish'],
-    rows: [{ k: 'Marka', v: 'G-5' }, { k: 'Qotish boshlanishi', v: '6 daqiqa' }, { k: 'To\u2018liq qotish', v: '10 daqiqa' }, { k: 'Fraksiya', v: '0,2 mm' }, { k: 'Oqlik', v: '85%' }, { k: 'Qop', v: '25 kg' }]
-  },
-  'IN-01': {
-    long: 'Karerdan olingan va yuvilgan maydalangan tosh. Chang va loy aralashmasi minimal, shakli kubsimon \u2014 beton aralashmasida sement sarfini kamaytiradi. Samosvallarda tonna yoki m\u00b3 hisobida yetkaziladi.',
-    uses: ['Beton aralashmasi', 'Yo\u2018l asosi', 'Drenaj qatlami', 'Maydoncha to\u2018ldirish'],
-    rows: [{ k: 'Fraksiya', v: '5\u201316 / 20\u201340 mm' }, { k: 'Zichlik', v: '1400 kg/m\u00b3' }, { k: 'Chang miqdori', v: '< 1%' }, { k: 'Yemirilish', v: 'M1200' }, { k: 'Sovuqbardoshlik', v: 'F150' }, { k: 'Yetkazish', v: 'Samosval 10\u201325 t' }]
-  },
-  'IN-02': {
-    long: 'Ikki turdagi qum: yuvilgan qum beton va suvoq uchun, quruq elangan qum esa quruq qorishmalar va tekislash qatlami uchun. Modul kattaligi va loyqa miqdori laboratoriyada nazorat qilinadi.',
-    uses: ['Beton aralashmasi', 'Suvoq qorishmasi', 'Tekislash qatlami', 'Yo\u2018lka asosi'],
-    rows: [{ k: 'Yiriklik moduli', v: '1,8\u20132,5' }, { k: 'Loyqa aralashma', v: '< 2%' }, { k: 'Namlik (quruq)', v: '< 5%' }, { k: 'Zichlik', v: '1500 kg/m\u00b3' }, { k: 'Turlari', v: 'Yuvilgan / quruq' }, { k: 'Yetkazish', v: 'Samosval 10\u201325 t' }]
-  }
-};
+function parseHash() {
+  const h = (location.hash || '#/').replace(/^#/, '');
+  const parts = h.split('?')[0].split('/').filter(Boolean);
+  return { page: parts[0] || 'home', id: parts[1] || '' };
+}
 
 class Component extends DCLogic {
   state = {
-    theme: 'dark', open: -1,
-    tab: 'all', hover: -1, mode: 'monolit',
-    L: 10, W: 6, H: 0.25, area: 120, slabT: 0.22,
-    workType: 'poydevor', pdf: 0, sent: 0, counts: [0, 0, 0, 0]
+    D: window.STONMAX || null, theme: (window.STONMAX && window.STONMAX.theme()) || 'dark',
+    route: parseHash(), w: window.innerWidth, menu: false,
+    cat: 'all', q: '', sort: 'pop', sel: 0, qty: 1, blogTag: 'all',
+    mode: 'beton', L: 10, W: 6, H: 0.3, grade: 4, dist: 10, span: 6, roomW: 6, sw: '1.2',
+    form: emptyForm(), err: {}, sent: null, counts: [0, 0, 0, 0]
   };
 
-  setTilt = (n) => { if (n) this.tiltRef = n; };
-  setSlab = (n) => { if (n) this.slabRef = n; };
-  setTop = (n) => { if (n) this.layerTopRef = n; };
-  setRebar = (n) => { if (n) this.layerRebarRef = n; };
-  setCount = (n) => { if (n) this.countRef = n; };
+  setTilt = (n) => {
+    if (this._tilt === n) return;
+    if (this._tilt) this._tilt.removeEventListener('mousemove', this.onTilt);
+    this._tilt = n || null;
+    if (n) n.addEventListener('mousemove', this.onTilt);
+  };
+  setSlab = (n) => { this._slab = n; };
+  setTop = (n) => { this._top = n; };
+  setRebar = (n) => { this._rebar = n; };
+  onTilt = (e) => {
+    const r = this._tilt.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    if (this._slab) this._slab.style.transform = 'rotateX(' + (-y * 12) + 'deg) rotateY(' + (x * 16) + 'deg)';
+    if (this._top) this._top.setAttribute('transform', 'translate(' + (x * 18) + ',' + (-46 - Math.abs(y) * 30) + ')');
+    if (this._rebar) this._rebar.setAttribute('transform', 'translate(' + (x * 8) + ',' + (26 - Math.abs(y) * 10) + ')');
+  };
 
   componentDidMount() {
-    try {
-      const saved = localStorage.getItem('sx-theme');
-      const saved2 = (saved === 'light' || saved === 'dark') ? saved : 'dark';
-      this.setState({ theme: saved2 });
-      document.documentElement.setAttribute('data-sx-theme', saved2);
-    } catch (e) {}
-    this._key = (e) => { if (e.key === 'Escape') this.setState({ open: -1 }); };
-    window.addEventListener('keydown', this._key);
-
-    const el = this.tiltRef;
-    if (el) {
-      this._move = (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        if (this.slabRef) this.slabRef.style.transform = 'rotateX(' + (-y * 12) + 'deg) rotateY(' + (x * 16) + 'deg)';
-        if (this.layerTopRef) this.layerTopRef.setAttribute('transform', 'translate(' + (x * 18) + ',' + (-46 - Math.abs(y) * 26) + ')');
-        if (this.layerRebarRef) this.layerRebarRef.setAttribute('transform', 'translate(' + (x * 8) + ',' + (26 - Math.abs(y) * 10) + ')');
-      };
-      el.addEventListener('mousemove', this._move);
+    if (!this.state.D) {
+      this._wait = setInterval(() => {
+        if (window.STONMAX) { clearInterval(this._wait); this.setState({ D: window.STONMAX, theme: window.STONMAX.theme() }); }
+      }, 40);
     }
-    const targets = [1450, 62, 34, 11];
-    const run = () => {
-      const t0 = performance.now();
-      const tick = () => {
-        const p = Math.min(1, (performance.now() - t0) / 1500);
-        const e = 1 - Math.pow(1 - p, 3);
-        this.setState({ counts: targets.map(v => Math.round(v * e)) });
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
+    this._hash = () => { this.setState({ route: parseHash(), menu: false, sel: 0, qty: 1 }); window.scrollTo(0, 0); };
+    this._resize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('hashchange', this._hash);
+    window.addEventListener('resize', this._resize);
+    const targets = [1450, 11, 34, 50];
+    const t0 = performance.now() + 250;
+    const tick = () => {
+      const p = Math.max(0, Math.min(1, (performance.now() - t0) / 1400));
+      const e = 1 - Math.pow(1 - p, 3);
+      this.setState({ counts: targets.map(v => Math.round(v * e)) });
+      if (p < 1) this._raf = requestAnimationFrame(tick);
     };
-    if (this.countRef && 'IntersectionObserver' in window) {
-      this._io = new IntersectionObserver((en) => {
-        if (en.some(x => x.isIntersecting)) { run(); this._io.disconnect(); }
-      }, { threshold: 0.15 });
-      this._io.observe(this.countRef);
-      this._fallback = setTimeout(() => {
-        if (this._io) { this._io.disconnect(); this._io = null; }
-        if (this.state.counts[0] === 0) run();
-      }, 2500);
-    } else run();
+    this._raf = requestAnimationFrame(tick);
   }
-
   componentWillUnmount() {
-    if (this._move && this.tiltRef) this.tiltRef.removeEventListener('mousemove', this._move);
-    if (this._io) this._io.disconnect();
-    if (this._fallback) clearTimeout(this._fallback);
-    if (this._key) window.removeEventListener('keydown', this._key);
+    window.removeEventListener('hashchange', this._hash);
+    window.removeEventListener('resize', this._resize);
+    clearInterval(this._wait); cancelAnimationFrame(this._raf); this.setTilt(null);
   }
 
-  num(v) { return new Intl.NumberFormat('ru-RU').format(Math.round(v)); }
-
-  volumeM3() {
-    const s = this.state;
-    return s.mode === 'monolit' ? s.L * s.W * s.H : s.area * s.slabT;
+  go(hash) { if (location.hash === hash) this._hash(); else location.hash = hash; }
+  order(pid, qtyText, est) {
+    this.setState({ form: Object.assign(emptyForm(), this.state.form, { product: pid, qty: qtyText, estimate: est || 0 }), sent: null, err: {} });
+    this.go('#/aloqa');
   }
 
-  grade() {
-    const w = this.state.workType;
-    if (w === 'poydevor') return { mark: 'M300 / B22,5', frost: 'F200' };
-    if (w === 'monolit') return { mark: 'M350 / B25', frost: 'F250' };
-    if (w === 'pol') return { mark: 'M200 / B15', frost: 'F150' };
-    return { mark: 'M150 / B12,5', frost: 'F100' };
+  slabPick(prods) {
+    const s = this.state, span = Math.round(s.span * 10) / 10;
+    if (span > 7.3) {
+      const pb = prods.find(p => p.id === 'pb');
+      const i = pb.variants.findIndex(v => Math.abs(v.lmin - span) < 0.05);
+      return { p: pb, v: pb.variants[i], i, w: 1.2, forced: s.sw === '1' };
+    }
+    const pk = prods.find(p => p.id === '2pk');
+    let i = pk.variants.findIndex(v => span >= v.lmin - 0.001 && span <= v.lmax + 0.051 && (v.w === s.sw || v.w === '1 / 1.2'));
+    if (i < 0) i = pk.variants.findIndex(v => span >= v.lmin - 0.001 && span <= v.lmax + 0.051);
+    return { p: pk, v: pk.variants[i], i, w: +s.sw, forced: false };
   }
 
   renderVals() {
-    const s = this.state;
-    const price = this.props.pricePerM3 ?? 620000;
-    const radius = this.props.deliveryRadiusKm ?? 50;
-    const vol = this.volumeM3();
-    const g = this.grade();
-    const list = s.tab === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === s.tab);
+    const s = this.state, D = s.D;
+    const fmt = D ? D.fmt : (n) => String(Math.round(n));
+    const so = (n) => fmt(n) + ' so‘m';
+    const prods = D ? D.products() : [];
+    const C = D ? D.contact : { phone: '+998 55 810 00 05', phoneHref: 'tel:+998558100005', telegram: '@stonmax', telegramHref: 'https://t.me/stonmax', address: 'Qo‘qon sh.', hours: '24/7' };
+    const cats = D ? D.CATS : [];
+    const page = s.route.page;
+    const isDesk = s.w >= 1000, isMob = !isDesk;
+    const card = (p) => ({
+      href: '#/mahsulot/' + p.id, code: p.code, name: p.name, short: p.short, catName: p.catName,
+      fromLabel: p.from != null ? fmt(p.from) + ' so‘m dan / ' + p.unit : 'Narx so‘rov bo‘yicha',
+      varCount: p.variants.length ? p.variants.length + ' variant' : '',
+      specs2: p.specs.slice(0, 2).map(x => ({ k: x[0], v: x[1] }))
+    });
 
-    const openP = s.open >= 0 ? PRODUCTS[s.open] : null;
-    const det = openP ? Object.assign({}, openP, DETAILS[openP.code] || { long: openP.body, uses: [], rows: openP.specs }) : false;
+    let list = prods.filter(p => s.cat === 'all' || p.cat === s.cat);
+    const q = s.q.trim().toLowerCase();
+    if (q) list = list.filter(p => (p.name + ' ' + p.code + ' ' + p.short + ' ' + p.variants.map(v => v.label).join(' ')).toLowerCase().includes(q));
+    if (s.sort !== 'pop') list = list.slice().sort((a, b) => ((a.from ?? 1e12) - (b.from ?? 1e12)) * (s.sort === 'asc' ? 1 : -1));
+
+    const P = page === 'mahsulot' ? prods.find(p => p.id === s.route.id) : null;
+    const sel = P && P.variants.length ? Math.min(s.sel, P.variants.length - 1) : 0;
+    const V = P && P.variants[sel];
+    const pr = P ? {
+      code: P.code, name: P.name, short: P.short, catName: P.catName, unit: P.unit, slotId: 'photo-' + P.id,
+      hasVariants: P.variants.length > 0, noVariants: P.variants.length === 0,
+      options: P.variants.map((v, i) => ({ value: String(i), label: v.label + ' — ' + so(v.price) })),
+      specList: P.specs.map(x => ({ k: x[0], v: x[1] })),
+      descList: P.desc.map(t => ({ t })), useList: P.uses.map((t, i) => ({ t, no: String(i + 1).padStart(2, '0') })),
+      cols: P.cols, varCount: P.variants.length + ' variant',
+      rows: P.variants.map((v, i) => ({ cells: v.cells, price: fmt(v.price), bg: i === sel ? 'var(--surf)' : 'transparent', priceColor: i === sel ? '#dd0506' : 'var(--ink)', onClick: () => { this.setState({ sel: i }); window.scrollTo({ top: 0, behavior: 'smooth' }); } })),
+      note: P.id === 'beton' ? 'Narx 1 m³ uchun, 0–15 km yetkazish bilan. 15–50 km uchun yetkazish alohida kelishiladi.' : 'Narx 1 ' + P.unit + ' uchun, zavoddan olib ketish. Yetkazish va kran xizmati alohida hisoblanadi.'
+    } : { cols: [], rows: [], options: [], specList: [], descList: [], useList: [] };
+    const jumpTo = (id) => () => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 130, behavior: 'smooth' }); };
+    pr.jumps = [['Narx', 'p-narx-top'], ['Qo‘llanilishi', 'p-joy'], ['Parametrlar', 'p-param'], ['Tavsif', 'p-tavsif']].concat(P && P.variants.length ? [['Narxlar jadvali', 'p-jadval']] : []).map((j, i) => ({ label: j[0], line: i === 0 ? '#dd0506' : 'transparent', color: i === 0 ? 'var(--ink)' : 'var(--mute)', onClick: j[1] === 'p-narx-top' ? () => window.scrollTo({ top: 0, behavior: 'smooth' }) : jumpTo(j[1]) }));
+    const posts = D ? D.posts() : [];
+    const dt = (d) => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('ru-RU'); };
+    const pcard = (b) => ({ href: '#/blog/' + b.id, title: b.title, excerpt: b.excerpt, tag: b.tag, meta: dt(b.date) + ' · ' + (b.read || 3) + ' daq', slotId: 'blog-' + b.id });
+    const POST = page === 'blog' && s.route.id ? posts.find(b => b.id === s.route.id) : null;
+    const tagsAll = ['all'].concat(Array.from(new Set(posts.map(b => b.tag))));
+    const sq = s.q.trim().toLowerCase();
+    const sug = page === 'home' && sq ? prods.filter(p => (p.name + ' ' + p.code + ' ' + p.short + ' ' + p.variants.map(v => v.label).join(' ')).toLowerCase().includes(sq)).slice(0, 5) : [];
+    const tabKey = page === 'mahsulot' ? 'katalog' : page;
+    const tabC = {}, tabL = {};
+    ['home', 'katalog', 'kalkulyator', 'blog'].forEach(k => { tabC[k] = k === tabKey ? '#dd0506' : 'var(--mute)'; tabL[k] = k === tabKey ? '#dd0506' : 'transparent'; });
+
+    const grades = (prods.find(p => p.id === 'beton') || { variants: [] }).variants;
+    const G = grades[s.grade] || { price: 0, mark: '', cls: '', frost: '', water: '' };
+    const vol = s.L * s.W * s.H;
+    const slab = prods.length ? this.slabPick(prods) : { v: null };
+    const slabCount = Math.max(1, Math.ceil(s.roomW / (slab.w || 1.2)));
+    const isBeton = s.mode === 'beton';
+    const betonTotal = vol * G.price;
+    const slabTotal = slab.v ? slab.v.price * slabCount : 0;
+
+    const field = (k) => (e) => { const v = e.target.type === 'checkbox' ? e.target.checked : e.target.value; this.setState(st => ({ form: Object.assign({}, st.form, { [k]: v }), err: Object.assign({}, st.err, { [k]: '' }) })); };
+    const on = {}; ['name', 'phone', 'telegram', 'product', 'qty', 'address', 'tgPref'].forEach(k => on[k] = field(k));
 
     return {
-      theme: s.theme,
-      themeLabel: s.theme === 'dark' ? 'Light' : 'Dark',
-      themeTitle: s.theme === 'dark' ? 'Yorug\u2018 rejimga o\u2018tish' : 'Qorong\u2018u rejimga o\u2018tish',
-      toggleTheme: () => {
-        const t = s.theme === 'dark' ? 'light' : 'dark';
-        this.setState({ theme: t });
-        document.documentElement.setAttribute('data-sx-theme', t);
-        try { localStorage.setItem('sx-theme', t); } catch (e) {}
-      },
-      detail: det,
-      closeDetail: () => this.setState({ open: -1 }),
-      stop: (e) => e.stopPropagation(),
+      theme: s.theme, isDark: s.theme === 'dark', isLight: s.theme === 'light',
+      toggleTheme: () => { const t = s.theme === 'dark' ? 'light' : 'dark'; if (D) D.setTheme(t); this.setState({ theme: t }); },
+      isDesk, isMob, bottomPad: isMob ? (page === 'mahsulot' && V ? '132px' : '64px') : '0px',
+      menuOpen: s.menu && isMob, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      navItems: NAV.map(n => { const act = n[2] === page || (n[2] === 'katalog' && page === 'mahsulot'); return { label: n[0], href: n[1], color: act ? '#dd0506' : 'var(--ink)', line: act ? '#dd0506' : 'transparent' }; }),
+      phone: C.phone, phoneHref: C.phoneHref, tg: C.telegram, tgHref: C.telegramHref, address: C.address, hours: C.hours,
+      tiltRef: this.setTilt, slabRef: this.setSlab, topRef: this.setTop, rebarRef: this.setRebar,
 
-      tiltRef: this.setTilt,
-      slabRef: this.setSlab,
-      layerTopRef: this.setTop,
-      layerRebarRef: this.setRebar,
-      countRef: this.setCount,
-
-      heroStats: [
-        { value: '1 450 m\u00b3', label: 'Kunlik quvvat' },
-        { value: 'M100\u2013M450', label: 'Beton markalari' },
-        { value: '34', label: 'Mikser avtopark' },
-        { value: '24/7', label: 'Yetkazish' }
-      ],
-
-      tickerRuns: [{ items: TICKER }, { items: TICKER }],
-
-      tabs: CATS.map(c => ({
-        label: c.label,
-        bg: s.tab === c.id ? '#dd0506' : 'transparent',
-        fg: s.tab === c.id ? '#ffffff' : 'var(--sx-muted)',
-        onClick: () => this.setState({ tab: c.id })
-      })),
-
-      visibleProducts: list.map((p) => {
-        const i = PRODUCTS.indexOf(p);
-        const on = s.hover === i;
-        return Object.assign({}, p, {
-          border: on ? '#dd0506' : 'var(--sx-line)',
-          transform: on ? 'translateY(-6px) scale(1.015)' : 'none',
-          blur: on ? 'blur(2px)' : 'none',
-          hud: on ? 1 : 0,
-          hudShift: on ? 'none' : 'translateY(12px)',
-          onEnter: () => this.setState({ hover: i }),
-          onLeave: () => this.setState({ hover: -1 }),
-          onOpen: () => this.setState({ open: i })
-        });
-      }),
-
-      modes: [
-        { label: 'Monolit (m\u00b3)', bg: s.mode === 'monolit' ? '#dd0506' : 'transparent', fg: s.mode === 'monolit' ? '#ffffff' : 'var(--sx-muted)', onClick: () => this.setState({ mode: 'monolit' }) },
-        { label: 'Plita (m\u00b2)', bg: s.mode === 'plita' ? '#dd0506' : 'transparent', fg: s.mode === 'plita' ? '#ffffff' : 'var(--sx-muted)', onClick: () => this.setState({ mode: 'plita' }) }
-      ],
-
-      sliders: s.mode === 'monolit' ? [
-        { label: 'Uzunlik', display: s.L.toFixed(1) + ' m', min: 1, max: 60, step: 0.5, value: s.L, onChange: (e) => this.setState({ L: +e.target.value }) },
-        { label: 'Kenglik', display: s.W.toFixed(1) + ' m', min: 1, max: 40, step: 0.5, value: s.W, onChange: (e) => this.setState({ W: +e.target.value }) },
-        { label: 'Balandlik / qalinlik', display: s.H.toFixed(2) + ' m', min: 0.05, max: 1.5, step: 0.05, value: s.H, onChange: (e) => this.setState({ H: +e.target.value }) }
-      ] : [
-        { label: 'Maydon', display: this.num(s.area) + ' m\u00b2', min: 10, max: 2000, step: 10, value: s.area, onChange: (e) => this.setState({ area: +e.target.value }) },
-        { label: 'Plita qalinligi', display: (s.slabT * 1000).toFixed(0) + ' mm', min: 0.1, max: 0.4, step: 0.01, value: s.slabT, onChange: (e) => this.setState({ slabT: +e.target.value }) }
-      ],
-
-      workType: s.workType,
-      onWorkType: (e) => this.setState({ workType: e.target.value }),
-
-      volume: vol.toFixed(1) + ' m\u00b3',
-      results: [
-        { k: 'Tavsiya marka', v: g.mark },
-        { k: 'Sovuqbardoshlik', v: g.frost },
-        { k: 'Shag\u2018al 5\u201316 mm', v: this.num(vol * 1.05) + ' t' },
-        { k: 'Qum (mitiy)', v: this.num(vol * 0.75) + ' t' },
-        { k: 'Sement M400', v: this.num(vol * 330 / 50) + ' qop' },
-        { k: 'Mikser reyslari', v: Math.max(1, Math.ceil(vol / 7)) + ' \u00d7 7 m\u00b3' }
-      ],
-      estimate: this.num(vol * price) + ' so\u2018m',
-      estimateNote: this.num(price) + ' so\u2018m/m\u00b3 \u00b7 ' + g.mark + ' \u00b7 ' + radius + ' km radiusda yetkazish kiritilgan',
-      pdfLabel: s.pdf ? 'Hisobot tayyorlanmoqda\u2026' : 'PDF hisobotni olish',
-      onPdf: () => { this.setState({ pdf: 1 }); setTimeout(() => this.setState({ pdf: 0 }), 1800); },
+      isHome: page === 'home', isCatalog: page === 'katalog', isProduct: page === 'mahsulot' && !!P, isCalc: page === 'kalkulyator', isDelivery: page === 'yetkazish', isContact: page === 'aloqa',
 
       counters: [
-        { shown: this.num(s.counts[0]) + ' m\u00b3', label: 'Kunlik ishlab chiqarish' },
-        { shown: s.counts[1], label: 'Laboratoriya sertifikati' },
-        { shown: s.counts[2], label: 'Mikser va samosval' },
-        { shown: s.counts[3] + ' yil', label: 'Zavod tajribasi' }
+        { shown: fmt(s.counts[0]) + ' m³', label: 'Kunlik quvvat' },
+        { shown: s.counts[1], label: 'Mahsulot turi' },
+        { shown: s.counts[2], label: 'Mikser va texnika' },
+        { shown: s.counts[3] + ' km', label: 'Yetkazish radiusi' }
+      ],
+      tickerRuns: [{ items: TICKER }, { items: TICKER }],
+      catTiles: cats.filter(c => c.id !== 'all').map((c, i) => {
+        const ps = prods.filter(p => p.cat === c.id); const fr = ps.map(p => p.from).filter(x => x != null);
+        return { no: String(i + 1).padStart(2, '0'), name: c.name, count: ps.length + ' mahsulot', from: fr.length ? fmt(Math.min.apply(null, fr)) + ' so‘m dan' : 'So‘rov bo‘yicha', onClick: () => this.setState({ cat: c.id, q: '' }) };
+      }),
+      gradeChips: grades.map(g => ({ mark: g.mark, cls: g.cls + ' · ' + g.frost + ' · ' + g.water, price: fmt(g.price) })),
+      featured: FEATURED.map(id => prods.find(p => p.id === id)).filter(Boolean).map(card),
+      towns: [{ km: '0 km', name: 'Qo‘qon' }, { km: '12 km', name: 'Uchko‘prik' }, { km: '21 km', name: 'Yaypan' }, { km: '28 km', name: 'Beshariq' }, { km: '34 km', name: 'Rishton' }, { km: '37 km', name: 'Bag‘dod' }],
+      certs: [
+        { badge: 'GOST 9561-2016', title: 'Plitalar standarti', body: 'Geometriya, armatura va yuklama bo‘yicha muvofiqlik.' },
+        { badge: 'GOST 7473-2010', title: 'Tayyor beton', body: 'Har reysga sifat pasporti va yo‘l varaqasi.' },
+        { badge: 'Laboratoriya', title: 'Har partiya sinovda', body: 'Nazorat kubiklari, 7 va 28 kunlik mustahkamlik bayonnomasi.' },
+        { badge: 'B2B', title: 'Ulgurji hamkorlik', body: 'Quruvchi kompaniyalar uchun shartnoma va barqaror narx.' }
       ],
 
-      radius: radius,
-      mapPoints: [
-        { name: 'Uchko\u2018prik \u00b7 12 km', left: '62%', top: '35%' },
-        { name: 'Bag\u2018dod \u00b7 37 km', left: '79%', top: '56%' },
-        { name: 'Rishton \u00b7 34 km', left: '74%', top: '66%' },
-        { name: 'Yaypan \u00b7 21 km', left: '38%', top: '63%' },
-        { name: 'Beshariq \u00b7 28 km', left: '36%', top: '55%' }
-      ].map(p => {
-        const x = parseFloat(p.left);
-        const right = (x >= 50 && x < 70) || x < 20;
-        return Object.assign({}, p, { dir: right ? 'row' : 'row-reverse', shift: right ? '-4px' : 'calc(-100% + 4px)' });
-      }),
+      catalogCount: list.length + ' ta mahsulot', q: s.q, sort: s.sort, noResults: list.length === 0,
+      onSearch: (e) => this.setState({ q: e.target.value }), onSort: (e) => this.setState({ sort: e.target.value }),
+      tabs: cats.map(c => ({ label: c.name, border: s.cat === c.id ? '#dd0506' : 'var(--line)', bg: s.cat === c.id ? '#dd0506' : 'transparent', fg: s.cat === c.id ? '#fff' : 'var(--ink)', onClick: () => this.setState({ cat: c.id }) })),
+      catalog: list.map(card),
+
+      isBlog: page === 'blog' && !s.route.id, isPost: !!POST,
+      homePosts: posts.slice(0, 3).map(pcard),
+      blogTags: tagsAll.map(t => ({ label: t === 'all' ? 'Barchasi' : t, border: s.blogTag === t ? '#dd0506' : 'var(--line)', bg: s.blogTag === t ? '#dd0506' : 'transparent', fg: s.blogTag === t ? '#fff' : 'var(--ink)', onClick: () => this.setState({ blogTag: t }) })),
+      blogList: posts.filter(b => s.blogTag === 'all' || b.tag === s.blogTag).map(pcard),
+      post: POST ? Object.assign(pcard(POST), {
+        blocks: String(POST.body || '').split(/\n\s*\n/).map(t => t.trim()).filter(Boolean).flatMap(t => { const ls = t.split('\n'); if (ls[0].startsWith('## ')) { const out = [{ isH: true, isP: false, t: ls[0].slice(3) }]; const rest = ls.slice(1).join(' ').trim(); if (rest) out.push({ isH: false, isP: true, t: rest }); return out; } return [{ isH: false, isP: true, t: t.replace(/\n/g, ' ') }]; }),
+        prods: (POST.products || []).map(id => prods.find(p => p.id === id)).filter(Boolean).map(card),
+        hasProducts: (POST.products || []).some(id => prods.find(p => p.id === id))
+      }) : { blocks: [], prods: [] },
+      hasSuggest: sug.length > 0,
+      suggest: sug.map(p => ({ href: '#/mahsulot/' + p.id, code: p.code, name: p.name, price: p.from != null ? fmt(p.from) + ' so‘m dan' : 'so‘rov' })),
+      onHomeSearch: (e) => { e.preventDefault(); this.setState({ cat: 'all' }); this.go('#/katalog'); },
+      quickCats: cats.filter(c => c.id !== 'all').map(c => ({ name: c.name, n: prods.filter(p => p.cat === c.id).length, onClick: () => this.setState({ cat: c.id, q: '' }) })),
+      tabC, tabL,
+      showProdBar: isMob && page === 'mahsulot' && !!V,
+      prodBarLabel: V ? V.label + ' × ' + s.qty : '', prodBarPrice: V ? so(V.price * s.qty) : '',
+      pr, sel: String(sel), qty: s.qty,
+      onSel: (e) => this.setState({ sel: +e.target.value }),
+      onQty: (e) => this.setState({ qty: Math.max(1, parseInt(e.target.value, 10) || 1) }),
+      qtyInc: () => this.setState({ qty: s.qty + 1 }), qtyDec: () => this.setState({ qty: Math.max(1, s.qty - 1) }),
+      unitPrice: V ? so(V.price) + ' / ' + P.unit : '',
+      lineTotal: V ? so(V.price * s.qty) : '',
+      orderProduct: () => P && this.order(P.id, V ? V.label + ' × ' + s.qty + ' ' + P.unit : '', V ? V.price * s.qty : 0),
+      related: P ? prods.filter(p => p.id !== P.id && p.cat === P.cat).concat(prods.filter(p => p.cat !== P.cat)).slice(0, 4).map(card) : [],
+
+      modes: [['beton', 'Beton, m³'], ['plita', 'Plita yopma']].map(m => ({ label: m[1], bg: s.mode === m[0] ? '#dd0506' : 'transparent', fg: s.mode === m[0] ? '#fff' : 'var(--mute)', onClick: () => this.setState({ mode: m[0] }) })),
+      isBetonMode: isBeton, isPlitaMode: !isBeton,
+      sliders: isBeton ? [
+        { label: 'Uzunlik', display: s.L.toFixed(1) + ' m', min: 1, max: 60, step: 0.5, value: s.L, onChange: (e) => this.setState({ L: +e.target.value }) },
+        { label: 'Kenglik', display: s.W.toFixed(1) + ' m', min: 0.3, max: 40, step: 0.1, value: s.W, onChange: (e) => this.setState({ W: +e.target.value }) },
+        { label: 'Balandlik / qalinlik', display: s.H.toFixed(2) + ' m', min: 0.05, max: 2, step: 0.05, value: s.H, onChange: (e) => this.setState({ H: +e.target.value }) },
+        { label: 'Masofa zavoddan', display: s.dist + ' km', min: 0, max: 50, step: 1, value: s.dist, onChange: (e) => this.setState({ dist: +e.target.value }) }
+      ] : [
+        { label: 'Oraliq (plita uzunligi)', display: s.span.toFixed(1) + ' m', min: 1.9, max: 8.9, step: 0.1, value: s.span, onChange: (e) => this.setState({ span: +e.target.value }) },
+        { label: 'Xona kengligi', display: s.roomW.toFixed(1) + ' m', min: 1, max: 40, step: 0.1, value: s.roomW, onChange: (e) => this.setState({ roomW: +e.target.value }) }
+      ],
+      gradeIdx: String(s.grade), onGrade: (e) => this.setState({ grade: +e.target.value }),
+      gradeOptions: grades.map((g, i) => ({ value: String(i), label: g.label + ' — ' + so(g.price) + '/m³' })),
+      widthOpts: ['1', '1.2'].map(w => ({ label: w + ' m', bg: s.sw === w ? '#dd0506' : 'transparent', fg: s.sw === w ? '#fff' : 'var(--mute)', onClick: () => this.setState({ sw: w }) })),
+      calcHeadLabel: isBeton ? 'Umumiy hajm' : 'Plitalar soni',
+      calcHead: isBeton ? vol.toFixed(1) + ' m³' : slabCount + ' dona',
+      results: isBeton ? [
+        { k: 'Marka', v: G.mark + ' / ' + G.cls },
+        { k: 'F / W', v: G.frost + ' / ' + G.water },
+        { k: 'Narx / m³', v: so(G.price) },
+        { k: 'Mikser reyslari', v: Math.max(1, Math.ceil(vol / 8)) + ' × 8 m³' }
+      ] : [
+        { k: 'Mahsulot', v: slab.v ? slab.v.label : '—' },
+        { k: 'Armatura', v: slab.v ? slab.v.cells[2] : '—' },
+        { k: 'Narx / dona', v: slab.v ? so(slab.v.price) : '—' },
+        { k: 'Yopma maydoni', v: (s.span * s.roomW).toFixed(1) + ' m²' }
+      ],
+      estimate: so(isBeton ? betonTotal : slabTotal),
+      estimateNote: isBeton
+        ? (s.dist <= 15 ? 'Yetkazish narxga kiritilgan (0–15 km).' : s.dist + ' km: 15 km dan ortiq yetkazish alohida kelishiladi.')
+        : (slab.forced ? '7,3 m dan uzun oraliqlar faqat 1,2 m kenglikdagi PB plitalarda.' : 'Zavoddan olib ketish narxi. Yetkazish va kran alohida.'),
+      orderCalc: () => isBeton
+        ? this.order('beton', vol.toFixed(1) + ' m³ ' + G.mark + ', ' + s.dist + ' km', betonTotal)
+        : (slab.v && this.order(slab.p.id, slabCount + ' dona ' + slab.v.label, slabTotal)),
+      printCalc: () => window.print(),
+
+      mapPoints: POINTS.map(p => { const x = parseFloat(p.left); const r = (x >= 50 && x < 70) || x < 20; return Object.assign({}, p, { dir: r ? 'row' : 'row-reverse', shift: r ? '-4px' : 'calc(-100% + 4px)' }); }),
+      deliveryTerms: [
+        { k: 'Radius', v: '50 km, Qo‘qon markaz' },
+        { k: 'Beton 0–15 km', v: 'Narxga kiritilgan' },
+        { k: 'Beton 15–50 km', v: 'Kelishuv asosida' },
+        { k: 'Temir-beton buyumlar', v: 'Manipulyator / kran' },
+        { k: 'Rejim', v: '24/7' }
+      ],
       logistics: [
         { no: '01', title: 'Uzluksiz quyish grafigi', body: 'Katta hajmli monolit ishlar uchun mikserlar 20 daqiqalik interval bilan navbatlanadi.' },
-        { no: '02', title: 'Zavod laboratoriyasi', body: 'Har partiyadan kubik namunalar olinadi, 7 va 28 kunlik mustahkamlik bayonnomasi beriladi.' },
-        { no: '03', title: 'Qishki rejim', body: 'Sovuqbardosh qo\u2018shimchalar va isitilgan aralashma \u2212 15 \u00b0C gacha quyishga ruxsat beradi.' },
-        { no: '04', title: 'Ulgurji shartnoma', body: 'B2B mijozlar uchun kechiktirilgan to\u2018lov, doimiy narx va ajratilgan menejer.' }
+        { no: '02', title: 'Zavod laboratoriyasi', body: 'Har partiyadan kubik namunalar olinadi, 7 va 28 kunlik bayonnoma beriladi.' },
+        { no: '03', title: 'Qishki rejim', body: 'Sovuqqa chidamli qo‘shimchalar bilan −15 °C gacha quyish.' }
       ],
-
-      certs: [
-        { badge: 'GOST 9561-2016', title: 'Bo\u2018shliqli plitalar standarti', body: 'Geometriya, armatura va yuklama sinovlari bo\u2018yicha muvofiqlik.' },
-        { badge: 'ISO 9001', title: 'Sifat boshqaruvi tizimi', body: 'Xomashyo qabulidan yetkazishgacha bo\u2018lgan har bosqich hujjatlashtirilgan.' },
-        { badge: 'Laboratoriya', title: 'Har partiya sinovdan o\u2018tadi', body: 'Kubik namunalar, oquvchanlik konusi, namlik va fraksiya nazorati.' },
-        { badge: 'B2B Partner', title: 'Ulgurji hamkorlik', body: 'Quruvchi kompaniyalar uchun kvartal hajm shartnomalari va barqaror narx.' }
-      ],
-      grades: GRADES,
 
       contacts: [
-        { k: 'Savdo bo\u2018limi', v: '+998 95 402 00 05' },
-        { k: 'Telegram', v: '@stonmax' },
-        { k: 'Manzil', v: 'Qo\'qon sanoat zonasi' }
+        { k: 'Savdo bo‘limi', v: C.phone, href: C.phoneHref },
+        { k: 'Telegram', v: C.telegram, href: C.telegramHref },
+        { k: 'Manzil', v: C.address, href: '#/yetkazish' },
+        { k: 'Ish vaqti', v: C.hours, href: C.phoneHref }
       ],
-      submitLabel: s.sent ? 'So\u2018rov yuborildi \u2713' : 'So\u2018rov yuborish \u2192',
-      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: 1 }); }
+      f: s.form, on,
+      err: { name: s.err.name || '', phone: s.err.phone || '', nameLine: s.err.name ? '#dd0506' : 'var(--line)', phoneLine: s.err.phone ? '#dd0506' : 'var(--line)' },
+      productOptions: prods.map(p => ({ value: p.id, label: p.name })),
+      sentLead: !!s.sent, showForm: !s.sent,
+      sentId: s.sent ? s.sent.id : '', sentName: s.sent ? s.sent.name : '', sentPhone: s.sent ? s.sent.phone : '', sentAmo: s.sent ? s.sent.amo : '',
+      newLead: () => this.setState({ sent: null, form: emptyForm() }),
+      onSubmit: (e) => {
+        e.preventDefault();
+        const f = s.form, err = {};
+        if (f.name.trim().length < 2) err.name = 'Ismingizni kiriting';
+        if (f.phone.replace(/\D/g, '').length < 9) err.phone = 'Telefon raqamini to‘liq kiriting';
+        if (Object.keys(err).length) return this.setState({ err });
+        const p = prods.find(x => x.id === f.product) || {};
+        const lead = D ? D.addLead({ name: f.name.trim(), phone: f.phone.trim(), telegram: f.telegram.trim(), tgPref: f.tgPref, product: p.name, productId: p.id, category: p.cat, qty: f.qty, address: f.address, estimate: f.estimate || 0 }) : { id: 'SM-0000', name: f.name, phone: f.phone, amo: 'Navbatda' };
+        this.setState({ sent: lead, err: {} });
+      }
     };
   }
 }
 
 </script>
 </body>
-
 </html>

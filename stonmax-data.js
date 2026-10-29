@@ -187,8 +187,8 @@
   const api = {
     contact: { phone: '+998 55 810 00 05', phoneHref: 'tel:+998558100005', telegram: '@stonmax', telegramHref: 'https://t.me/stonmax', address: 'Farg‘ona vil., Qo‘qon sh., sanoat zonasi', hours: '24/7, dam olishsiz', email: 'savdo@stonmax.uz' },
     socials: [
-      { id: 'instagram', name: 'Instagram', href: 'https://instagram.com/stonmax' },
-      { id: 'facebook', name: 'Facebook', href: 'https://facebook.com/stonmax' },
+      { id: 'instagram', name: 'Instagram', href: 'https://instagram.com/stonmax.uz' },
+      { id: 'facebook', name: 'Facebook', href: 'https://facebook.com/stonmaxuz' },
       { id: 'telegram', name: 'Telegram', href: 'https://t.me/stonmax' },
       { id: 'youtube', name: 'YouTube', href: 'https://youtube.com/@stonmax' }
     ],
